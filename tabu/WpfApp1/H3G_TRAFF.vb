@@ -6,7 +6,7 @@ Public Class H3G_TRAFF
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
-        specifica = specifica.XCRead(My.Application.Info.DirectoryPath & "\specifiche\specificaWindTre.xml")
+        specifica = specifica.XCRead(My.Application.Info.DirectoryPath & ".\specifiche\specificaWindTre.xml")
         SetImporter(_MyReader, specifica)
 
 
@@ -251,7 +251,7 @@ Public Class H3G_TRAFF
         Else
             _MyReader.TextFieldType = FileIO.FieldType.FixedWidth
         End If
-        If (_specifica.trimWhiteSpace = 1) Then
+        If (_specifica.trimWhiteSpace = True) Then
             _MyReader.TrimWhiteSpace() = True
         End If
     End Sub

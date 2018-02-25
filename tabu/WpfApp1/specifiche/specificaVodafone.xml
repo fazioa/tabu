@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XControl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <intestazione>Ricerca Traffico Storico</intestazione>
+  <TitoloTraffico>Origine</TitoloTraffico>
+  
+  
+  <delimitato>false</delimitato>
+  <delimitatore> </delimitatore>
+  <larghezzaFissa>1</larghezzaFissa>
+  <delimitatoriFissi>
+  <int>1</int>
+  <int>31</int>
+  <int>56</int>
+  <int>96</int>
+  <int>121</int>
+  <int>146</int>
+  <int>156</int>
+  <int>169</int>
+  <int>194</int>
+  <int>219</int>
+  <int>9999</int>
+ </delimitatoriFissi>
+ 
+  <trimWhiteSpace>true</trimWhiteSpace>
+                                    
+                                                                                               
+  <CampiVoce>
+    <string>Origine / Smcs / Digitato</string>
+	<string>Chiamato</string>
+	<string>Chiamante</string>
+    <string>Data e Ora Inizio</string>
+	<string>Tipo</string>
+	<string>UCA</string>
+	<string>IMEI</string>
+	<string>IMSI</string>
+	<string>DescrizioneCellaInizioFine</string>
+</CampiVoce>
+   
+
+<Tipo>
+    <Voce>
+	<string>1</string>
+	<string>2</string>
+	<string>3</string>
+	<string>4</string>
+	<string>5</string>
+	<string>10</string>
+	<string>36</string>
+	<string>37</string>
+	<string>38</string>
+	<string>39</string>
+	<string>40</string>
+	<string>41</string>
+	<string>62</string>
+		<string>64</string>
+	<string>65</string>
+	<string>U1</string>
+	<string>U2</string>
+	<string>U3</string>
+		<string>57</string>
+		<string>58</string>
+		<string>60</string>
+		<string>61</string>
+		<string>62</string>
+	</Voce>
+    
+    <Sms>
+	<string>6</string>
+	<string>7</string>
+	<string>8</string>
+	<string>9</string>
+	<string>33</string>
+	<string>63</string>
+	<string>69</string>
+	<string>6</string>
+	<string>53</string>
+	<string>54</string>
+	<string>55</string>
+	<string>56</string>
+	<string>63</string>
+	  </Sms>
+    
+	<Video>
+	<string>34</string>
+	<string>35</string>
+	<string>66</string>
+	<string>67</string>
+	<string>68</string>
+	</Video>
+	
+    <Dati>
+	<string>12</string>
+	<string>13</string>
+	<string>14</string>
+	<string>15</string>
+	<string>16</string>
+	<string>17</string>
+	<string>18</string>
+	<string>19</string>
+	<string>20</string>
+	<string>21</string>
+	<string>23</string>
+	<string>26</string>
+	<string>52</string>
+    </Dati>
+
+    <Altro>
+<string>49</string>
+<string>50</string>
+<string>51</string>
+<string>54</string>
+    </Altro>
+
+
+    <DettaglioDatiChiamato>
+	<string>2</string>
+<string>5</string>
+<string>7</string>
+<string>9</string>
+<string>33</string>
+<string>35</string>
+<string>40</string>
+<string>65</string>
+<string>67</string>
+<string>13</string>
+<string>15</string>
+<string>19</string>
+<string>21</string>
+<string>50</string>
+<string>54</string>
+<string>56</string>
+<string>61</string>
+<string>69</string>
+    </DettaglioDatiChiamato>
+  </Tipo>
+
+
+</XControl>
+

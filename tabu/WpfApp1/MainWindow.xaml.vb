@@ -61,14 +61,13 @@ Class MainWindow
 
         'per ogni file, in base al gestore, viene chiamato il relativo importatore
         For Each rowInDataset In itemsDataset
-
-
             Select Case rowInDataset.Gestore
                 Case constants.telecomTraffico
                 Case constants.telecomTrafficoTelematico
 
                 Case constants.vodafoneTrafficoTelematico
-
+                    Dim vodafone As New Vodafone()
+                    vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.windTraffico
                     Dim wind As New Wind()
                     wind.DecodeWind(rowInDataset.pathNomeFile, righeTabulato, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
@@ -89,8 +88,35 @@ Class MainWindow
     End Sub
 
 
-    Private Sub Button_file_Click_1(sender As Object, e As RoutedEventArgs) Handles Button_file.Click
+    Private Sub Button_esporta_Click(sender As Object, e As RoutedEventArgs) Handles Button_esporta.Click
 
+        ExportToExcelAndCsv(grid_dettaglio_tabulato, "tabulato.csv")
+        ExportToExcelAndCsv(grid_anagrafica, "anagrafica.csv")
+
+    End Sub
+
+    Private Sub ExportToExcelAndCsv(dgDisplay As DataGrid, sNomeFile As String)
+
+        dgDisplay.SelectAllCells()
+        dgDisplay.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader
+        ApplicationCommands.Copy.Execute(Nothing, dgDisplay)
+        Dim result As String = Clipboard.GetData(DataFormats.CommaSeparatedValue)
+        dgDisplay.UnselectAllCells()
+
+        Dim file1 As System.IO.StreamWriter = New System.IO.StreamWriter(sNomeFile)
+        file1.WriteLine(result)
+        'file1.WriteLine(result.Replace(",", ", "))
+        file1.Close()
+
+
+
+        'Process.Start("C:\Users\fazio\Documents\test.csv")
+
+
+        MessageBox.Show(" Exporting DataGrid data to Excel file created.xls")
+    End Sub
+
+    Private Sub Button_file_Click(sender As Object, e As RoutedEventArgs) Handles Button_file.Click
         Dim openFileDialog1 As New Microsoft.Win32.OpenFileDialog()
         openFileDialog1.Multiselect = True
         If (openFileDialog1.ShowDialog() = True) Then
@@ -119,34 +145,6 @@ Class MainWindow
             gridFileList.Items.Refresh()
 
         End If
-    End Sub
-
-    Private Sub Button_esporta_Click(sender As Object, e As RoutedEventArgs) Handles Button_esporta.Click
-
-        ExportToExcelAndCsv(grid_dettaglio_tabulato, "tabulato.csv")
-        ExportToExcelAndCsv(grid_anagrafica, "anagrafica.csv")
-
-    End Sub
-
-    Private Sub ExportToExcelAndCsv(dgDisplay As DataGrid, sNomeFile As String)
-
-        dgDisplay.SelectAllCells()
-        dgDisplay.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader
-        ApplicationCommands.Copy.Execute(Nothing, dgDisplay)
-        Dim result As String = Clipboard.GetData(DataFormats.CommaSeparatedValue)
-        dgDisplay.UnselectAllCells()
-
-        Dim file1 As System.IO.StreamWriter = New System.IO.StreamWriter(sNomeFile)
-        file1.WriteLine(result)
-        'file1.WriteLine(result.Replace(",", ", "))
-        file1.Close()
-
-
-
-        'Process.Start("C:\Users\fazio\Documents\test.csv")
-
-
-        MessageBox.Show(" Exporting DataGrid data to Excel file created.xls")
     End Sub
 End Class
 

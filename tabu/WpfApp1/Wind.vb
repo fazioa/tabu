@@ -6,7 +6,7 @@ Public Class Wind
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
-        specifica = specifica.XCRead(My.Application.Info.DirectoryPath & "\specifiche\specificaWind.xml")
+        specifica = specifica.XCRead(My.Application.Info.DirectoryPath & ".\specifiche\specificaWind.xml")
         SetImporter(_MyReader, specifica)
 
         While Not _MyReader.EndOfData
@@ -290,7 +290,7 @@ Public Class Wind
         Else
             _MyReader.TextFieldType = FileIO.FieldType.FixedWidth
         End If
-        If (_specifica.trimWhiteSpace = 1) Then
+        If (_specifica.trimWhiteSpace = True) Then
             _MyReader.TrimWhiteSpace() = True
         End If
     End Sub

@@ -6,8 +6,11 @@ Public Class XControl
     Private _intestazione As String
     Private _delimitato As Boolean
     Private _delimitatore As String
+    Private _delimitatoriFissi As New List(Of Integer)
     Private _trimWhiteSpace As Boolean
+    Private _larghezzaFissa As Boolean
 
+    Dim _titoloTraffico As String
     Dim _titoloTrafficoVoce As String
     Dim _titoloTrafficoSMS As String
     Dim _titoloTrafficoServizi As String
@@ -26,6 +29,8 @@ Public Class XControl
     Dim _campiDati As New List(Of String)
     Dim _campiAnagrafica As New List(Of String)
     Dim _tipo As New tipoComunicazione()
+
+
 
     Public Class tipoComunicazione
 
@@ -240,6 +245,33 @@ Public Class XControl
         End Get
         Set(value As String)
             _titoloTrafficoDati = value
+        End Set
+    End Property
+
+    Public Property delimitatoriFissi As List(Of Integer)
+        Get
+            Return _delimitatoriFissi
+        End Get
+        Set(value As List(Of Integer))
+            _delimitatoriFissi = value
+        End Set
+    End Property
+
+    Public Property LarghezzaFissa As Boolean
+        Get
+            Return _larghezzaFissa
+        End Get
+        Set(value As Boolean)
+            _larghezzaFissa = value
+        End Set
+    End Property
+
+    Public Property TitoloTraffico As String
+        Get
+            Return _titoloTraffico
+        End Get
+        Set(value As String)
+            _titoloTraffico = value
         End Set
     End Property
 
