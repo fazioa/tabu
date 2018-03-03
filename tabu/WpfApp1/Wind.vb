@@ -35,8 +35,7 @@ Public Class Wind
 
             Catch ex As Microsoft.VisualBasic.
                        FileIO.MalformedLineException
-                MsgBox("Line " & _MyReader.LineNumber & " - " & ex.Message &
-                "is not valid and will be skipped.")
+                MsgBox("File " & nomeFile & " - Line " & _MyReader.LineNumber & " - " & ex.Message & "is not valid and will be skipped.")
             End Try
         End While
     End Sub

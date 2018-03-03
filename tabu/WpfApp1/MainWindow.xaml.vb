@@ -27,36 +27,41 @@ Class MainWindow
 
             For i = 1 To 2
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
-                MyReader.SetDelimiters("|")
-
-                currentRow = MyReader.ReadFields
-
-                Select Case currentRow(0).Trim
-                    Case "Telecom Italia S.p.A.                         CONSULTAZIONE TRAFFICO RADIOMOBILE"
-                        row.Gestore = constants.telecomTraffico
-                    Case "Telecom Italia S.P.A. traffico telematico radiomobile"
-                        row.Gestore = constants.telecomTrafficoTelematico
-                    Case "Ricerca Traffico Storico"
-                        row.Gestore = constants.vodafoneTrafficoTelematico
-                    Case "Wind Tre S.p.A. con Socio Unico - Ufficio LDS"
-                        'va avanti di una riga
-                        currentRow = MyReader.ReadFields
-                        If (currentRow(0).Equals("##Report Anagrafica Massiva")) Then
-                            row.Gestore = constants.windTreAnagrafica
-                        Else
-                            row.Gestore = constants.windTreTraffico
-                        End If
-                    Case "### DATI RICHIESTA ###"
-                        row.Gestore = constants.windTraffico
-                End Select
+                MyReader.SetDelimiters("|", ":")
+                Try
+                    currentRow = MyReader.ReadFields
+                    Select Case currentRow(0).Trim
+                        Case "Telecom Italia S.p.A.                         CONSULTAZIONE TRAFFICO RADIOMOBILE"
+                            row.Gestore = constants.telecomTraffico
+                        Case "Telecom Italia S.P.A. traffico telematico radiomobile"
+                            row.Gestore = constants.telecomTrafficoTelematico
+                        Case "Ricerca Traffico Storico"
+                            row.Gestore = constants.vodafoneTraffico
+                        Case "Ricerca Anagrafica per tabulato RTS"
+                            row.Gestore = constants.vodafoneAnagrafica
+                        Case "Wind Tre S.p.A. con Socio Unico - Ufficio LDS"
+                            'va avanti di una riga
+                            currentRow = MyReader.ReadFields
+                            If (currentRow(0).Equals("##Report Anagrafica Massiva")) Then
+                                row.Gestore = constants.windTreAnagrafica
+                            Else
+                                row.Gestore = constants.windTreTraffico
+                            End If
+                        Case "### DATI RICHIESTA ###"
+                            row.Gestore = constants.windTraffico
+                    End Select
+                Catch ex As MalformedLineException
+                    MsgBox("File " & row.pathNomeFile & " - Line " & MyReader.LineNumber & " - " & ex.Message & "is not valid and will be skipped.")
+                End Try
             Next
+
         Next
     End Sub
 
     Private Sub Button_importa_Click(sender As Object, e As RoutedEventArgs) Handles Button_importa.Click
         esamina()
         righeTabulato.Clear()
-
+        righeAnagrafica.Clear()
         ' a questo punto il dataset e relativo datagrid sono già riempiti.
 
         'per ogni file, in base al gestore, viene chiamato il relativo importatore
@@ -65,9 +70,12 @@ Class MainWindow
                 Case constants.telecomTraffico
                 Case constants.telecomTrafficoTelematico
 
-                Case constants.vodafoneTrafficoTelematico
+                Case constants.vodafoneTraffico
                     Dim vodafone As New Vodafone()
                     vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+                Case constants.vodafoneAnagrafica
+                    Dim vodafone As New Vodafone_anagrafica()
+                    vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.windTraffico
                     Dim wind As New Wind()
                     wind.DecodeWind(rowInDataset.pathNomeFile, righeTabulato, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)

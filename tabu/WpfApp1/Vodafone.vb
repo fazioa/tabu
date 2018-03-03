@@ -11,14 +11,13 @@ Public Class Vodafone
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
         specifica = specifica.XCRead(My.Application.Info.DirectoryPath & ".\specifiche\specificaVodafone.xml")
-        '  SetImporter(_MyReader, specifica)
 
-        'sovrascrive momentaneamente il tipo di impostazione del parser
         _MyReader.TextFieldType = FileIO.FieldType.Delimited
         _MyReader.SetDelimiters("/", "\t")
 
-        Try
-            While Not _MyReader.EndOfData
+
+        While Not _MyReader.EndOfData
+            Try
                 currentRowFields = _MyReader.ReadFields
 
                 Select Case currentRowFields(0)
@@ -26,11 +25,11 @@ Public Class Vodafone
                         '  SetImporter(_MyReader, specifica)
                         DecodeVodafoneFoniaDatiSMS(specifica, _rigaTab, nomeFile, gestore)
                 End Select
+            Catch ex As Exception
+                MsgBox("Error - File " & nomeFile & " - Line nr." & _MyReader.LineNumber & " - " & ex.Message)
+            End Try
+        End While
 
-            End While
-        Catch ex As Exception
-            MsgBox("Error - File " & nomeFile & " - Line nr." & _MyReader.LineNumber & " - " & ex.Message)
-        End Try
 
     End Sub
 

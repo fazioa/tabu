@@ -2,10 +2,15 @@
 <XControl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <intestazione>Ricerca Traffico Storico</intestazione>
   <TitoloTraffico>Origine</TitoloTraffico>
-  
+  <TitoloAnagrafica>Ricerca Anagrafica per tabulato RTS</TitoloAnagrafica>
   
   <delimitato>false</delimitato>
   <delimitatore> </delimitatore>
+  
+  <delimitatoAnagrafica>true</delimitatoAnagrafica>
+  <delimitatoreAnagrafica>tab</delimitatoreAnagrafica>
+  
+  
   <larghezzaFissa>1</larghezzaFissa>
   <delimitatoriFissi>
   <int>1</int>
@@ -134,6 +139,28 @@
     </DettaglioDatiChiamato>
   </Tipo>
 
-
+<!---
+Numero Telefono	SN	Numero Sim	Tipo	SS	Data Attivazione SIM	Data Disattivazione SIM	S.I.M.	Dealer	VF Point	Master Dealer/Canale di Distribuzione	Evento	
+Domicilio Fattura Customer	Cognome Customer	Nome Customer	Residenza Customer	Luogo/Data di Nascita Customer	C.F./P.IVA Customer
+-->
+<CampiAnagrafica>
+<string>Numero Telefono</string>
+<string>SN</string>
+<string>Numero Sim</string>
+<string>Tipo</string>
+<string>SS</string>
+<string>Data Attivazione SIM</string>
+<string>Data Disattivazione SIM</string>
+<string>S.I.M.</string>
+<string>Dealer</string>
+<string>VF Point</string>
+<string>Master Dealer/Canale di Distribuzione</string>
+<string>Evento</string>
+<string>Domicilio Fattura Customer</string>
+<string>Cognome</string> <!--- campo successivo Nome - i due campi vengono uniti  -->
+<string>Residenza</string>
+<string>Luogo/Data di Nascita</string>
+<string>C.F./P.IVA</string>
+</CampiAnagrafica>
 </XControl>
 

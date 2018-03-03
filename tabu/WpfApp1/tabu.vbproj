@@ -83,6 +83,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="constants.vb" />
+    <Compile Include="vodafone_ANA.vb" />
     <Compile Include="H3G_ANA.vb" />
     <Compile Include="rigaDataGridAnagrafica.vb" />
     <Compile Include="Vodafone.vb" />

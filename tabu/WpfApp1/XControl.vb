@@ -6,6 +6,8 @@ Public Class XControl
     Private _intestazione As String
     Private _delimitato As Boolean
     Private _delimitatore As String
+    Private _delimitatoAnagrafica As Boolean
+    Private _delimitatoreAnagrafica As String
     Private _delimitatoriFissi As New List(Of Integer)
     Private _trimWhiteSpace As Boolean
     Private _larghezzaFissa As Boolean
@@ -272,6 +274,24 @@ Public Class XControl
         End Get
         Set(value As String)
             _titoloTraffico = value
+        End Set
+    End Property
+
+    Public Property delimitatoAnagrafica As Boolean
+        Get
+            Return _delimitatoAnagrafica
+        End Get
+        Set(value As Boolean)
+            _delimitatoAnagrafica = value
+        End Set
+    End Property
+
+    Public Property delimitatoreAnagrafica As String
+        Get
+            Return _delimitatoreAnagrafica
+        End Get
+        Set(value As String)
+            _delimitatoreAnagrafica = value
         End Set
     End Property
 
