@@ -11,7 +11,7 @@ Public Class Wind
 
         While Not _MyReader.EndOfData
             Try
-                currentRowFields = _MyReader.ReadFields
+                currentRowFields = read(_MyReader)
             Catch ex As Exception
                 MsgBox("Error - File " & nomeFile & " - Line nr." & _MyReader.LineNumber & " - " & ex.Message)
             End Try
@@ -19,7 +19,7 @@ Public Class Wind
 
                 Select Case currentRowFields(0).Trim
                     Case specifica.TitoloTrafficoVoce
-                        currentRowFields = _MyReader.ReadFields
+                        currentRowFields = read(_MyReader)
                         Select Case currentRowFields(0).Trim
                             Case specifica.SottoTitoloTrafficoVoce
                                 DecodeWindVoce(specifica, _rigaTab, nomeFile, gestore)
@@ -44,9 +44,9 @@ Public Class Wind
         Dim rigaAnagrafica As rigaAnagrafica
         Dim bExit As Boolean = False
         'salta una riga
-        currentRowFields = _MyReader.ReadFields
+        currentRowFields = read(_MyReader)
         While Not _MyReader.EndOfData And Not bExit = True
-            currentRowFields = _MyReader.ReadFields
+            currentRowFields = read(_MyReader)
             If (currentRowFields.Length > 1) Then
                 Dim i As Integer = 0
                 rigaAnagrafica = New rigaAnagrafica
@@ -92,6 +92,8 @@ Public Class Wind
         End While
     End Sub
 
+
+
     Sub DecodeWindVoce(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
         Dim riga As rigaTabulato
         Dim bExit As Boolean = False
@@ -99,7 +101,7 @@ Public Class Wind
         'salta una riga
         ' currentRowFields = _MyReader.ReadFields
         While Not _MyReader.EndOfData And Not bExit = True
-            currentRowFields = _MyReader.ReadFields
+            currentRowFields = read(_MyReader)
             If (currentRowFields.Length > 1) Then
                 Dim i As Integer = 0
                 riga = New rigaTabulato
@@ -183,7 +185,7 @@ Public Class Wind
         'salta una riga
         ' currentRowFields = _MyReader.ReadFields
         While Not _MyReader.EndOfData And Not bExit = True
-            currentRowFields = _MyReader.ReadFields
+            currentRowFields = read(_MyReader)
             If (currentRowFields.Length > 1) Then
                 Dim i As Integer = 0
                 riga = New rigaTabulato
@@ -245,6 +247,7 @@ Public Class Wind
                 bExit = True
             End If
         End While
+
     End Sub
 
     Private Function IsDatiChiamato(_specifica As XControl, tipo As String) As Boolean
@@ -283,6 +286,8 @@ Public Class Wind
     End Function
 
     Private Sub SetImporter(ByRef _MyReader As FileIO.TextFieldParser, ByRef _specifica As XControl)
+        _MyReader.HasFieldsEnclosedInQuotes = False
+        '_MyReader.CommentTokens = New String() {""""}
         If (_specifica.delimitato) Then
             _MyReader.TextFieldType = FileIO.FieldType.Delimited
             _MyReader.SetDelimiters(_specifica.delimitatore) ' "|" per wind
@@ -293,5 +298,9 @@ Public Class Wind
             _MyReader.TrimWhiteSpace() = True
         End If
     End Sub
+
+    Private Function read(_myReader As TextFieldParser) As String()
+        Return _myReader.ReadFields()
+    End Function
 End Class
 

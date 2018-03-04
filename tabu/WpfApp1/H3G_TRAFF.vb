@@ -245,6 +245,7 @@ Public Class H3G_TRAFF
     End Function
 
     Private Sub SetImporter(ByRef _MyReader As FileIO.TextFieldParser, ByRef _specifica As XControl)
+        _MyReader.HasFieldsEnclosedInQuotes = False
         If (_specifica.delimitato) Then
             _MyReader.TextFieldType = FileIO.FieldType.Delimited
             _MyReader.SetDelimiters(_specifica.delimitatore) ' "|" per wind
