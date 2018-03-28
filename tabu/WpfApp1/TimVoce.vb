@@ -1,12 +1,12 @@
 ﻿Imports Microsoft.VisualBasic.FileIO
-Public Class Tim
+Public Class TimVoce
     Dim _MyReader As TextFieldParser
     Dim currentRowFields As String()
     Sub DecodeTim(pathNomeFile As String, ByRef _rigaTab As List(Of rigaTabulato), nomeFile As String, gestore As String)
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
-        specifica = specifica.XCRead(My.Application.Info.DirectoryPath & ".\specifiche\specificaTim.xml")
+        specifica = specifica.XCRead(My.Application.Info.DirectoryPath & ".\specifiche\specificaTimVoce.xml")
         _MyReader.TextFieldType = FileIO.FieldType.Delimited
         _MyReader.SetDelimiters(":")
 
@@ -36,9 +36,7 @@ Public Class Tim
     Sub DecodeTimVoce(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
         Dim riga As rigaTabulato
         Dim bExit As Boolean = False
-        Dim sHour As String
-        Dim sMinutes As String
-        Dim sSeconds As String
+
 
         Const NUMERO_CAMPO_TIPO_CHIAMATA As Integer = 21
         'salta una riga
@@ -109,7 +107,6 @@ Public Class Tim
             End If
         End While
     End Sub
-
 
     Private Function IsDatiChiamato(_specifica As XControl, tipo As String) As Boolean
         Dim _dettagliChiamatoListaSigle As List(Of String) = _specifica.Tipo.DettaglioDatiChiamato

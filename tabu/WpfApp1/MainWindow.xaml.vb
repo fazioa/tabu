@@ -68,10 +68,11 @@ Class MainWindow
         For Each rowInDataset In itemsDataset
             Select Case rowInDataset.Gestore
                 Case constants.telecomTraffico
-                    Dim tim_traffico As New Tim()
+                    Dim tim_traffico As New TimVoce()
                     tim_traffico.DecodeTim(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.telecomTrafficoTelematico
-                    fare da qui
+                    Dim tim_traffico As New TimDati()
+                    tim_traffico.DecodeTim(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
 'poi manca anagrafica
                 Case constants.vodafoneTraffico
                     Dim vodafone As New Vodafone()

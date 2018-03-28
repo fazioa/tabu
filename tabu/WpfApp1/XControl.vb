@@ -3,7 +3,6 @@ Imports System.Xml.Serialization
 
 Public Class XControl
 
-    Private _intestazione As String
     Private _delimitato As Boolean
     Private _delimitatore As String
     Private _delimitatoAnagrafica As Boolean
@@ -97,14 +96,6 @@ Public Class XControl
             End Set
         End Property
     End Class
-    Public Property intestazione As String
-        Get
-            Return _intestazione
-        End Get
-        Set(value As String)
-            _intestazione = value
-        End Set
-    End Property
 
     Public Property delimitato As Boolean
         Get

@@ -83,11 +83,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="constants.vb" />
+    <Compile Include="TimDati.vb" />
     <Compile Include="vodafone_ANA.vb" />
     <Compile Include="H3G_ANA.vb" />
     <Compile Include="rigaDataGridAnagrafica.vb" />
     <Compile Include="Vodafone.vb" />
-    <Compile Include="Tim.vb" />
+    <Compile Include="TimVoce.vb" />
     <Compile Include="Wind.vb" />
     <Compile Include="H3G_TRAFF.vb" />
     <Compile Include="rigaDataGridTabulato.vb" />
@@ -162,7 +163,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="specifiche\specificaTim.xml">
+    <None Include="specifiche\specificaTimDati.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="specifiche\specificaTimVoce.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
