@@ -68,8 +68,11 @@ Class MainWindow
         For Each rowInDataset In itemsDataset
             Select Case rowInDataset.Gestore
                 Case constants.telecomTraffico
+                    Dim tim_traffico As New Tim()
+                    tim_traffico.DecodeTim(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.telecomTrafficoTelematico
-
+                    fare da qui
+'poi manca anagrafica
                 Case constants.vodafoneTraffico
                     Dim vodafone As New Vodafone()
                     vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
@@ -79,7 +82,6 @@ Class MainWindow
                 Case constants.windTraffico
                     Dim wind As New Wind()
                     wind.DecodeWind(rowInDataset.pathNomeFile, righeTabulato, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
-
                 Case constants.windTreTraffico
                     Dim tre_traffico As New H3G_TRAFF()
                     tre_traffico.DecodeWindTre(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)

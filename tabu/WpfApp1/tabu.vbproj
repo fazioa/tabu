@@ -87,6 +87,7 @@
     <Compile Include="H3G_ANA.vb" />
     <Compile Include="rigaDataGridAnagrafica.vb" />
     <Compile Include="Vodafone.vb" />
+    <Compile Include="Tim.vb" />
     <Compile Include="Wind.vb" />
     <Compile Include="H3G_TRAFF.vb" />
     <Compile Include="rigaDataGridTabulato.vb" />
@@ -157,6 +158,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="specifiche\specificaWindTre.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="specifiche\specificaTim.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
