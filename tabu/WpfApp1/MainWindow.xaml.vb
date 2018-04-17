@@ -73,7 +73,8 @@ Class MainWindow
                 Case constants.telecomTrafficoTelematico
                     Dim tim_traffico As New TimDati()
                     tim_traffico.DecodeTim(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
-'poi manca anagrafica
+                Case constants.telecomAnagrafica
+                    Dim tim_anagrafica As New TimAnagrafica()
                 Case constants.vodafoneTraffico
                     Dim vodafone As New Vodafone()
                     vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)

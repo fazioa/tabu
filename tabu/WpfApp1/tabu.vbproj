@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="constants.vb" />
     <Compile Include="TimDati.vb" />
+    <Compile Include="Tim_ANA.vb" />
     <Compile Include="vodafone_ANA.vb" />
     <Compile Include="H3G_ANA.vb" />
     <Compile Include="rigaDataGridAnagrafica.vb" />

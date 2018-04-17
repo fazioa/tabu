@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XControl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <delimitato>true</delimitato>
+  <delimitatore>|</delimitatore>
+  <trimWhiteSpace>1</trimWhiteSpace>
+
+  <TitoloAnagrafica>Codice RDM :</TitoloAnagrafica>
+
+
+<delimitatoAnagrafica>true</delimitatoAnagrafica>
+  <delimitatoreAnagrafica>tab</delimitatoreAnagrafica>
+  
+  
+  <larghezzaFissa>1</larghezzaFissa>
+  <delimitatoriFissi>
+  <riga1>
+  <int>1</int>
+  <int>15</int>
+  <int>53</int>
+  <int>70</int>
+  <int>109</int>
+  <int>143</int>
+  <int>9999</int>
+  </riga1>
+    
+  <riga2>
+  <int>1</int>
+  <int>26</int>
+  <int>109</int>
+  <int>130</int>
+  <int>9999</int>
+  </riga2>
+  
+  <riga3>
+  <int>1</int>
+  <int>14</int>
+  <int>109</int>
+  <int>128</int>
+  <int>9999</int>
+  </riga3>
+
+ </delimitatoriFissi>
+                                                                                                                                                                                                
+     
+	 
+  <trimWhiteSpace>true</trimWhiteSpace>
+
+<CampiAnagrafica>
+ <string>MSISDN Master</string>
+ <string>Data Attivazione</string>
+ <string>Data variazione/ultima operazione</string>
+ <string>Cognome Nome/Rag.Sociale</string>
+ <string>Codice Fiscale/P.IVA</string>
+ <string>Indirizzo</string>
+ <string>Data Conversazione</string>
+</CampiAnagrafica>
+                                                                                                                                                                                                                                          
+     
+   
+</XControl>

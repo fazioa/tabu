@@ -49,7 +49,7 @@ Public Class TimDati
                 riga.Gestore = _gestore
                 riga.NomeFile = System.IO.Path.GetFileName(_nomeFile)
 
-
+                riga.Tipologia = "Dati"
                 For Each campo In _specifica.CampiDati
 
                     Select Case campo
@@ -75,16 +75,14 @@ Public Class TimDati
                             riga.CellaChiamante_inizio = currentRowFields(i)
                             i = i + 1
                             riga.CellaChiamante_fine = currentRowFields(i)
-                            Da qui
+                        Case "Celle GSM Documentate"
+                            riga.DescrizioneCellaInizioFine_Chiamante = currentRowFields(i) & " - " & currentRowFields(i + 1)
                         Case "CGI/ECGI/LocNumber"
                             If (IsDatiChiamato(_specifica, currentRowFields(NUMERO_CAMPO_TIPO_CHIAMATA))) Then
                                 riga.DescrizioneCellaInizioFine_Chiamato = currentRowFields(i) & " - " & currentRowFields(i + 1)
                             Else
                                 riga.DescrizioneCellaInizioFine_Chiamante = currentRowFields(i) & " - " & currentRowFields(i + 1)
                             End If
-                        Case "Tipo Chta"
-                            riga.Tipologia = GetTipoComunicazione(_specifica, currentRowFields(NUMERO_CAMPO_TIPO_CHIAMATA))
-                            riga.Codice_tipo_chiamata = currentRowFields(i)
                     End Select
                     i = i + 1
                 Next
