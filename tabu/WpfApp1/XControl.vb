@@ -8,27 +8,39 @@ Public Class XControl
     Private _delimitatoAnagrafica As Boolean
     Private _delimitatoreAnagrafica As String
     Private _delimitatoriFissi As New List(Of Integer)
+
+    Private _delimitatoriFissiRiga1 As New List(Of Integer)
+    Private _delimitatoriFissiRiga2 As New List(Of Integer)
+    Private _delimitatoriFissiRiga3 As New List(Of Integer)
+
     Private _trimWhiteSpace As Boolean
     Private _larghezzaFissa As Boolean
 
-    Dim _titoloTraffico As String
-    Dim _titoloTrafficoVoce As String
-    Dim _titoloTrafficoSMS As String
-    Dim _titoloTrafficoServizi As String
-    Dim _titoloTrafficoDati As String
+    Private _titoloTraffico As String
+    Private _titoloTrafficoVoce As String
+    Private _titoloTrafficoSMS As String
+    Private _titoloTrafficoServizi As String
+    Private _titoloTrafficoDati As String
 
-    Dim _titoloAnagrafica As String
-    Dim _sottoTitoloTrafficoDati As String
-    Dim _sottoTitoloTrafficoVoce As String
+    Private _titoloAnagrafica As String
+    Private _sottoTitoloTrafficoDati As String
+    Private _sottoTitoloTrafficoVoce As String
 
 
 
-    Dim _titoloTrafficoVoceOpVirtuali As String
+    Private _titoloTrafficoVoceOpVirtuali As String
 
-    Dim _campiVoce As New List(Of String)
-    Dim _campiSMS As New List(Of String)
-    Dim _campiDati As New List(Of String)
-    Dim _campiAnagrafica As New List(Of String)
+    Private _campiVoce As New List(Of String)
+    Private _campiSMS As New List(Of String)
+    Private _campiDati As New List(Of String)
+    Private _campiAnagrafica As New List(Of String)
+
+    Private _campiAnagraficaRiga1 As New List(Of String)
+    Private _campiAnagraficaRiga2 As New List(Of String)
+    Private _campiAnagraficaRiga3 As New List(Of String)
+
+    Private _fineReport As String
+
     Dim _tipo As New tipoComunicazione()
 
 
@@ -283,6 +295,69 @@ Public Class XControl
         End Get
         Set(value As String)
             _delimitatoreAnagrafica = value
+        End Set
+    End Property
+
+    Public Property DelimitatoriFissiRiga1 As List(Of Integer)
+        Get
+            Return _delimitatoriFissiRiga1
+        End Get
+        Set(value As List(Of Integer))
+            _delimitatoriFissiRiga1 = value
+        End Set
+    End Property
+
+    Public Property DelimitatoriFissiRiga2 As List(Of Integer)
+        Get
+            Return _delimitatoriFissiRiga2
+        End Get
+        Set(value As List(Of Integer))
+            _delimitatoriFissiRiga2 = value
+        End Set
+    End Property
+
+    Public Property DelimitatoriFissiRiga3 As List(Of Integer)
+        Get
+            Return _delimitatoriFissiRiga3
+        End Get
+        Set(value As List(Of Integer))
+            _delimitatoriFissiRiga3 = value
+        End Set
+    End Property
+
+    Public Property CampiAnagraficaRiga1 As List(Of String)
+        Get
+            Return _campiAnagraficaRiga1
+        End Get
+        Set(value As List(Of String))
+            _campiAnagraficaRiga1 = value
+        End Set
+    End Property
+
+    Public Property CampiAnagraficaRiga2 As List(Of String)
+        Get
+            Return _campiAnagraficaRiga2
+        End Get
+        Set(value As List(Of String))
+            _campiAnagraficaRiga2 = value
+        End Set
+    End Property
+
+    Public Property CampiAnagraficaRiga3 As List(Of String)
+        Get
+            Return _campiAnagraficaRiga3
+        End Get
+        Set(value As List(Of String))
+            _campiAnagraficaRiga3 = value
+        End Set
+    End Property
+
+    Public Property FineReport As String
+        Get
+            Return _fineReport
+        End Get
+        Set(value As String)
+            _fineReport = value
         End Set
     End Property
 

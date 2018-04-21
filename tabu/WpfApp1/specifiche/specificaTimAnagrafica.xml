@@ -4,57 +4,61 @@
   <delimitatore>|</delimitatore>
   <trimWhiteSpace>1</trimWhiteSpace>
 
-  <TitoloAnagrafica>Codice RDM :</TitoloAnagrafica>
+  <TitoloAnagrafica>Codice RDM</TitoloAnagrafica>
 
-
+  <delimitato>false</delimitato>
+  <delimitatore> </delimitatore>
 <delimitatoAnagrafica>true</delimitatoAnagrafica>
   <delimitatoreAnagrafica>tab</delimitatoreAnagrafica>
   
   
   <larghezzaFissa>1</larghezzaFissa>
-  <delimitatoriFissi>
-  <riga1>
-  <int>1</int>
+  
+  <DelimitatoriFissiRiga1>
   <int>15</int>
   <int>53</int>
   <int>70</int>
   <int>109</int>
   <int>143</int>
   <int>9999</int>
-  </riga1>
+  </DelimitatoriFissiRiga1>
     
-  <riga2>
-  <int>1</int>
+  <DelimitatoriFissiRiga2>
   <int>26</int>
   <int>109</int>
   <int>130</int>
   <int>9999</int>
-  </riga2>
+  </DelimitatoriFissiRiga2>
   
-  <riga3>
-  <int>1</int>
+  <DelimitatoriFissiRiga3>
   <int>14</int>
   <int>109</int>
   <int>128</int>
   <int>9999</int>
-  </riga3>
+  </DelimitatoriFissiRiga3>
 
- </delimitatoriFissi>
-                                                                                                                                                                                                
-     
-	 
+ 	 
   <trimWhiteSpace>true</trimWhiteSpace>
 
-<CampiAnagrafica>
+<CampiAnagraficaRiga1>
  <string>MSISDN Master</string>
  <string>Data Attivazione</string>
  <string>Data variazione/ultima operazione</string>
+ </CampiAnagraficaRiga1>
+ 
+ <CampiAnagraficaRiga2>
  <string>Cognome Nome/Rag.Sociale</string>
  <string>Codice Fiscale/P.IVA</string>
+  </CampiAnagraficaRiga2>
+  
+ <CampiAnagraficaRiga3>
  <string>Indirizzo</string>
  <string>Data Conversazione</string>
-</CampiAnagrafica>
-                                                                                                                                                                                                                                          
-     
+ </CampiAnagraficaRiga3>
+                 
+
+<FineReport>
+<string>Utenze per le quali non sono disponibili infomazioni anagrafiche :</string>				 
+</FineReport>     
    
 </XControl>

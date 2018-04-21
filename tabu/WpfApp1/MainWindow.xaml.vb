@@ -25,7 +25,7 @@ Class MainWindow
             Dim currentRow As String()
             Dim MyReader As New FileIO.TextFieldParser(row.pathNomeFile)
 
-            For i = 1 To 2
+            For i = 1 To 5
                 MyReader.TextFieldType = FileIO.FieldType.Delimited
                 MyReader.SetDelimiters("|", ":")
                 Try
@@ -35,6 +35,10 @@ Class MainWindow
                             row.Gestore = constants.telecomTraffico
                         Case "Telecom Italia S.P.A. traffico telematico radiomobile"
                             row.Gestore = constants.telecomTrafficoTelematico
+                        Case "Tipo Richiesta"
+                            If currentRow(1).Trim.Equals("AnagraficaSemplice") Then
+                                row.Gestore = constants.telecomAnagrafica
+                            End If
                         Case "Ricerca Traffico Storico"
                             row.Gestore = constants.vodafoneTraffico
                         Case "Ricerca Anagrafica per tabulato RTS"
@@ -51,6 +55,7 @@ Class MainWindow
                             row.Gestore = constants.windTraffico
                     End Select
                 Catch ex As MalformedLineException
+                Catch ex As NullReferenceException
                     MsgBox("File " & row.pathNomeFile & " - Line " & MyReader.LineNumber & " - " & ex.Message & "is not valid and will be skipped.")
                 End Try
             Next
@@ -74,7 +79,8 @@ Class MainWindow
                     Dim tim_traffico As New TimDati()
                     tim_traffico.DecodeTim(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.telecomAnagrafica
-                    Dim tim_anagrafica As New TimAnagrafica()
+                    Dim tim_anagrafica As New Tim_anagrafica()
+                    tim_anagrafica.DecodeTim(rowInDataset.pathNomeFile, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.vodafoneTraffico
                     Dim vodafone As New Vodafone()
                     vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)

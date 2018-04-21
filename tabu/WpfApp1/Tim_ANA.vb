@@ -1,96 +1,170 @@
 ﻿Imports Microsoft.VisualBasic.FileIO
+Imports tabu
+
 Public Class Tim_anagrafica
     Dim _MyReader As TextFieldParser
     Dim currentRowFields As String()
+    Sub DecodeTim(pathNomeFile As String, ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
+        _MyReader = New FileIO.TextFieldParser(pathNomeFile)
+        'imposta le specifiche per il gestore
+        Dim specifica As New XControl
+        specifica = specifica.XCRead(My.Application.Info.DirectoryPath & ".\specifiche\specificaTimAnagrafica.xml")
+        _MyReader.TextFieldType = FileIO.FieldType.Delimited
+        _MyReader.SetDelimiters(":")
 
-    Sub DecodeTelecomAnagrafica(_specifica As XControl, ByRef _rigaAna As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
 
-        DA FINIRE - DA QUI
+        While Not _MyReader.EndOfData
+            Try
+                currentRowFields = read(_MyReader)
+            Catch ex As Exception
+                MsgBox("Error - File " & nomeFile & " - Line nr." & _MyReader.LineNumber & " - " & ex.Message)
+            End Try
+            Try
 
+                Select Case currentRowFields(0).Trim
+                    Case specifica.TitoloAnagrafica
+                        SetImporter(_MyReader, specifica)
+                        DecodeTimAnagrafica(specifica, _rigaAnag, nomeFile, gestore)
+                End Select
+
+            Catch ex As Microsoft.VisualBasic.
+                       FileIO.MalformedLineException
+                MsgBox("File " & nomeFile & " - Line " & _MyReader.LineNumber & " - " & ex.Message & "is not valid and will be skipped.")
+            End Try
+        End While
+    End Sub
+
+
+    Sub DecodeTimAnagrafica(_specifica As XControl, ByRef _rigaAna As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
         Dim riga As rigaAnagrafica
-        Dim bExit As Boolean = False
+        Dim bExit As Boolean = False 'usata per l'uscita dal ciclo in caso di stringa di fine report
 
-        'salta una riga
-        currentRowFields = _MyReader.ReadFields
-        While Not _MyReader.EndOfData And Not bExit = True
-            currentRowFields = _MyReader.ReadFields
-            If (currentRowFields.Length > 1) Then
-                Dim i As Integer = 0
+        Dim sLine As String
+
+        While Not _MyReader.EndOfData And Not bExit
+            Try
                 riga = New rigaAnagrafica
                 riga.Gestore = _gestore
                 riga.NomeFile = System.IO.Path.GetFileName(_nomeFile)
 
-                For Each campo In _specifica.CampiAnagrafica
-                    Select Case campo
-                        Case "Numero Telefono"
-                            riga.Utenza = currentRowFields(i)
-                        Case "SN"
-                            riga.Stato = currentRowFields(i)
-                        Case "Data Attivazione SIM"
-                            riga.DataAttivazione = currentRowFields(i)
-                        Case "Data Disattivazione SIM"
-                            riga.DataDisattivazione = currentRowFields(i)
-                        Case "Dealer"
-                            riga.DealerVendita = currentRowFields(i)
-                        Case "C.F./P.IVA"
-                            If (currentRowFields.Length > i) Then 'se CF è vuoto il parse non considera il campo, quindi currentRowFields potrebbe non avere il 17° campo 
-                                riga.Codicefiscale = currentRowFields(i)
-                            End If
-                        Case "Domicilio Fattura Customer"
-                            If (currentRowFields.Length > i) Then
-                                riga.Indirizzo = currentRowFields(i)
-                            End If
-                        Case "Cognome"
-                            If (currentRowFields.Length > (i + 1)) Then
-                                riga.DatiAnagrafici = currentRowFields(i) + " " + currentRowFields(i + 1)
-                                i = i + 1
-                            Else
-                                If (currentRowFields.Length > (i)) Then
-                                    riga.DatiAnagrafici = currentRowFields(i)
-                                End If
-                            End If
-                        Case "Residenza"
-                            If (currentRowFields.Length > i) Then
-                                riga.Indirizzo = currentRowFields(i)
-                            End If
-                        Case "Luogo/Data di Nascita"
-                            If (currentRowFields.Length > i) Then
-                                If (currentRowFields(i).Length > 0) Then
-                                    Try
-                                        Dim sDataNascita As String = currentRowFields(i).Substring(currentRowFields(i).Length - 11, 11)
-                                        riga.DataNascita = sDataNascita
-                                    Catch ex As Exception
-                                    End Try
+                sLine = _MyReader.ReadFields(0) '_MyReader.ReadLine() - non usare il trim, altrimenti viene eliminato il primo campo, che generalmente è vuoto
 
-                                    Try
-                                        Dim sLuogoNascita As String = currentRowFields(i).Substring(0, currentRowFields(i).Length - 10)
-                                        riga.LuogoNascita = sLuogoNascita
-                                    Catch ex As Exception
-                                    End Try
-                                End If
-                            End If
-                        Case "Numero Sim"
-                            riga.IMSI = currentRowFields(i)
-                    End Select
-                    i = i + 1
-                Next
+                If (sLine.Equals(_specifica.FineReport)) Then
+                    bExit = True
+                Else
+                    leggiRiga1(sLine, riga, _specifica)
+                End If
+
+                sLine = _MyReader.ReadFields(0)
+                If (sLine.Equals(_specifica.FineReport) Or bExit) Then
+                    bExit = True
+                Else
+                    leggiRiga2(sLine, riga, _specifica)
+                End If
+
+                sLine = _MyReader.ReadFields(0)
+                If (sLine.Equals(_specifica.FineReport) Or bExit) Then
+                    bExit = True
+                Else
+                    leggiRiga3(sLine, riga, _specifica)
+                End If
+
+
                 _rigaAna.Add(riga)
-            Else
-                'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
-                bExit = True
-            End If
+
+            Catch ex As MalformedLineException
+                MsgBox("Error - File " & _nomeFile & " - Line nr." & _MyReader.LineNumber & " - " & ex.Message & " - " & _MyReader.ErrorLine)
+            End Try
         End While
+    End Sub
+
+    Private Sub leggiRiga1(sLine As String, riga As rigaAnagrafica, _specifica As XControl)
+        Dim i As Integer = 0
+        Dim riga1 = _specifica.DelimitatoriFissiRiga1
+        If (sLine.Length > 0) Then
+            For Each campo In _specifica.CampiAnagraficaRiga1
+                'sDato è il dato estrapolato dal file di testo che dovrà essere inserito nella struttura riga
+                Dim sDato As String
+
+                If (riga1.Count > i) Then
+                    If (riga1.Item(i + 1) < sLine.Length) Then
+                        sDato = sLine.Substring(riga1.Item(i) - 1, riga1.Item(i + 1) - riga1.Item(i)).Trim
+                    Else
+                        sDato = sLine.Substring(riga1.Item(i) - 1, sLine.Length - riga1.Item(i)).Trim
+                    End If
+
+                    Select Case campo
+                        Case "MSISDN Master"
+                            riga.Utenza = sDato
+                        Case "SN"
+                            riga.Stato = sDato
+                        Case "Data Attivazione"
+                            riga.DataAttivazione = sDato
+                        Case "Data variazione/ultima operazione"
+                            'valutare se inserire
+                    End Select
+                    i = i + 2
+                End If
+            Next
+        End If
+
+    End Sub
+
+    Private Sub leggiRiga2(sLine As String, riga As rigaAnagrafica, _specifica As XControl)
+        Dim i As Integer = 0
+        Dim delitatori_riga = _specifica.DelimitatoriFissiRiga2
+
+        If (sLine.Length > 0) Then
+
+            For Each campo In _specifica.CampiAnagraficaRiga2
+                'sDato è il dato estrapolato dal file di testo che dovrà essere inserito nella struttura riga
+                Dim sDato As String
+                If (delitatori_riga.Count > i) Then
+                    If (delitatori_riga.Item(i + 1) < sLine.Length) Then
+                        sDato = sLine.Substring(delitatori_riga.Item(i) - 1, delitatori_riga.Item(i + 1) - delitatori_riga.Item(i)).Trim
+                    Else
+                        sDato = sLine.Substring(delitatori_riga.Item(i) - 1, sLine.Length - delitatori_riga.Item(i)).Trim
+                    End If
+
+                    Select Case campo
+                        Case "Cognome Nome/Rag.Sociale"
+                            riga.DatiAnagrafici = sDato
+                        Case "Codice Fiscale/P.IVA"
+                            riga.Codicefiscale = sDato
+                    End Select
+                    i = i + 2
+                End If
+            Next
+        End If
+    End Sub
+    Private Sub leggiRiga3(sLine As String, riga As rigaAnagrafica, _specifica As XControl)
+        Dim i As Integer = 0
+        Dim delitatori_riga = _specifica.DelimitatoriFissiRiga3
+        If (sLine.Length > 0) Then
+            For Each campo In _specifica.CampiAnagraficaRiga3
+                'sDato è il dato estrapolato dal file di testo che dovrà essere inserito nella struttura riga
+                Dim sDato As String
+                If (delitatori_riga.Item(i + 1) < sLine.Length) Then
+                    sDato = sLine.Substring(delitatori_riga.Item(i) - 1, delitatori_riga.Item(i + 1) - delitatori_riga.Item(i)).Trim
+                Else
+                    sDato = sLine.Substring(delitatori_riga.Item(i) - 1, sLine.Length - delitatori_riga.Item(i)).Trim
+                End If
+
+                Select Case campo
+                    Case "Indirizzo"
+                        riga.Indirizzo = sDato
+                End Select
+                i = i + 2
+            Next
+        End If
     End Sub
 
     Private Sub SetImporter(ByRef _MyReader As FileIO.TextFieldParser, ByRef _specifica As XControl)
         _MyReader.HasFieldsEnclosedInQuotes = False
-        If (_specifica.delimitatoAnagrafica) Then
+        '_MyReader.CommentTokens = New String() {""""}
+        If (_specifica.delimitato) Then
             _MyReader.TextFieldType = FileIO.FieldType.Delimited
-            If (_specifica.delimitatoreAnagrafica.Equals("tab")) Then
-                _MyReader.SetDelimiters(vbTab) ' "|" per wind
-            Else
-                _MyReader.SetDelimiters(_specifica.delimitatoreAnagrafica) ' 
-            End If
+            _MyReader.SetDelimiters(_specifica.delimitatore) ' "|" per wind
         Else
             _MyReader.TextFieldType = FileIO.FieldType.FixedWidth
         End If
@@ -98,5 +172,9 @@ Public Class Tim_anagrafica
             _MyReader.TrimWhiteSpace() = True
         End If
     End Sub
+
+    Private Function read(_myReader As TextFieldParser) As String()
+        Return _myReader.ReadFields()
+    End Function
 
 End Class
