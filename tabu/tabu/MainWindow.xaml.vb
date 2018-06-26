@@ -11,12 +11,6 @@ Class MainWindow
         grid_anagrafica.ItemsSource = righeAnagrafica
     End Sub
 
-    Private Sub Button_esamina_Click(sender As Object, e As RoutedEventArgs) Handles Button_esamina.Click
-        esamina()
-
-        gridFileList.Items.Refresh()
-    End Sub
-
     Private Sub esamina()
         'esamina i file inseriti nel datagrid e scrive in tabella il gestore di appartenenza
 
@@ -30,30 +24,32 @@ Class MainWindow
                 MyReader.SetDelimiters("|", ":")
                 Try
                     currentRow = MyReader.ReadFields
-                    Select Case currentRow(0).Trim
-                        Case "Telecom Italia S.p.A.                         CONSULTAZIONE TRAFFICO RADIOMOBILE"
-                            row.Gestore = constants.telecomTraffico
-                        Case "Telecom Italia S.P.A. traffico telematico radiomobile"
-                            row.Gestore = constants.telecomTrafficoTelematico
-                        Case "Tipo Richiesta"
-                            If currentRow(1).Trim.Equals("AnagraficaSemplice") Then
-                                row.Gestore = constants.telecomAnagrafica
-                            End If
-                        Case "Ricerca Traffico Storico"
-                            row.Gestore = constants.vodafoneTraffico
-                        Case "Ricerca Anagrafica per tabulato RTS"
-                            row.Gestore = constants.vodafoneAnagrafica
-                        Case "Wind Tre S.p.A. con Socio Unico - Ufficio LDS"
-                            'va avanti di una riga
-                            currentRow = MyReader.ReadFields
-                            If (currentRow(0).Equals("##Report Anagrafica Massiva")) Then
-                                row.Gestore = constants.windTreAnagrafica
-                            Else
-                                row.Gestore = constants.windTreTraffico
-                            End If
-                        Case "### DATI RICHIESTA ###"
-                            row.Gestore = constants.windTraffico
-                    End Select
+                    If (Not currentRow Is Nothing) Then
+                        Select Case currentRow(0).Trim
+                            Case "Telecom Italia S.p.A.                         CONSULTAZIONE TRAFFICO RADIOMOBILE"
+                                row.Gestore = constants.telecomTraffico
+                            Case "Telecom Italia S.P.A. traffico telematico radiomobile"
+                                row.Gestore = constants.telecomTrafficoTelematico
+                            Case "Tipo Richiesta"
+                                If currentRow(1).Trim.Equals("AnagraficaSemplice") Then
+                                    row.Gestore = constants.telecomAnagrafica
+                                End If
+                            Case "Ricerca Traffico Storico"
+                                row.Gestore = constants.vodafoneTraffico
+                            Case "Ricerca Anagrafica per tabulato RTS"
+                                row.Gestore = constants.vodafoneAnagrafica
+                            Case "Wind Tre S.p.A. con Socio Unico - Ufficio LDS"
+                                'va avanti di una riga
+                                currentRow = MyReader.ReadFields
+                                If (currentRow(0).Equals("##Report Anagrafica Massiva")) Then
+                                    row.Gestore = constants.windTreAnagrafica
+                                Else
+                                    row.Gestore = constants.windTreTraffico
+                                End If
+                            Case "### DATI RICHIESTA ###"
+                                row.Gestore = constants.windTraffico
+                        End Select
+                    End If
                 Catch ex As MalformedLineException
                 Catch ex As NullReferenceException
                     MsgBox("File " & row.pathNomeFile & " - Line " & MyReader.LineNumber & " - " & ex.Message & "is not valid and will be skipped.")
@@ -107,10 +103,13 @@ Class MainWindow
 
 
     Private Sub Button_esporta_Click(sender As Object, e As RoutedEventArgs) Handles Button_esporta.Click
+        Dim sNomeFile As String = "tabulato.csv"
+        ExportToExcelAndCsv(grid_dettaglio_tabulato, sNomeFile)
+        MessageBox.Show("File CSV """ & sNomeFile & """ creato")
 
-        ExportToExcelAndCsv(grid_dettaglio_tabulato, "tabulato.csv")
-        ExportToExcelAndCsv(grid_anagrafica, "anagrafica.csv")
-
+        sNomeFile ="anagrafica.csv"
+        ExportToExcelAndCsv(grid_anagrafica, sNomeFile)
+        MessageBox.Show("File CSV """ & sNomeFile & """ creato")
     End Sub
 
     Private Sub ExportToExcelAndCsv(dgDisplay As DataGrid, sNomeFile As String)
@@ -125,13 +124,6 @@ Class MainWindow
         file1.WriteLine(result)
         'file1.WriteLine(result.Replace(",", ", "))
         file1.Close()
-
-
-
-        'Process.Start("C:\Users\fazio\Documents\test.csv")
-
-
-        MessageBox.Show(" Exporting DataGrid data to Excel file created.xls")
     End Sub
 
     Private Sub Button_file_Click(sender As Object, e As RoutedEventArgs) Handles Button_file.Click
@@ -153,16 +145,41 @@ Class MainWindow
                 Next
 
                 If (Not bFlag) Then
-                    itemsDataset.Add(New rigaFile() With {
-                         .pathNomeFile = sFileName,
-                        .Gestore = "--"
-                   })
+                    addFile(sFileName)
+
                 End If
                 bFlag = False
             Next
             gridFileList.Items.Refresh()
 
         End If
+    End Sub
+
+    Private Sub addFile(sFileName As String)
+        itemsDataset.Add(New rigaFile() With {
+                        .pathNomeFile = sFileName,
+                       .Gestore = "--"
+                  })
+    End Sub
+
+    Private Sub gridFileList_DragEnter(sender As Object, e As DragEventArgs) Handles gridFileList.DragEnter
+        If e.AllowedEffects = DragDropEffects.Move Then
+            e.Effects = DragDropEffects.Move
+        ElseIf e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effects = DragDropEffects.Copy
+        Else
+            e.Effects = DragDropEffects.None
+        End If
+    End Sub
+
+    Private Sub gridFileList_Drop(sender As Object, e As DragEventArgs) Handles gridFileList.Drop
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            Dim filePaths As String() = CType(e.Data.GetData(DataFormats.FileDrop), String())
+            For Each sFileName In filePaths
+                addFile(sFileName)
+            Next
+        End If
+        gridFileList.Items.Refresh()
     End Sub
 End Class
 

@@ -10,13 +10,11 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <Button x:Name="Button_esamina" Content="Esamina" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
         <Button x:Name="Button_file" Content="File..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
-        <DataGrid x:Name="gridFileList" Margin="10,35,10,622"/>
-        <Button x:Name="Button_importa" Content="Importa" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
-        <DataGrid x:Name="grid_dettaglio_tabulato" Height="301" Margin="10,0,10,316" VerticalAlignment="Bottom"/>
-        <DataGrid x:Name="grid_anagrafica" Height="301" Margin="10,0,10,10" VerticalAlignment="Bottom"/>
-        <Button x:Name="Button_esporta" Content="Esporta" HorizontalAlignment="Left" Margin="250,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <DataGrid x:Name="gridFileList" Margin="10,35,10,622" AllowDrop="True"/>
+        <Button x:Name="Button_importa" Content="Importa" HorizontalAlignment="Left" Margin="89,10,0,0" VerticalAlignment="Top" Width="76" Height="20"/>
+        <DataGrid x:Name="grid_dettaglio_tabulato" Height="301" Margin="10,0,10,316" VerticalAlignment="Bottom" AllowDrop="False"/>
+        <DataGrid x:Name="grid_anagrafica" Height="301" Margin="10,0,10,10" VerticalAlignment="Bottom" AllowDrop="False"/>
+        <Button x:Name="Button_esporta" Content="Esporta" HorizontalAlignment="Left" Margin="169,10,0,0" VerticalAlignment="Top" Width="76"/>
     </Grid>
 </Window>

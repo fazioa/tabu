@@ -1,0 +1,83 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+WpfApp1
+</name>
+</assembly>
+<members>
+<member name="T:WpfApp1.My.MyWpfExtension">
+ <summary>
+ Modulo utilizzato per definire le proprietà disponibili nello spazio dei nomi My per WPF
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:WpfApp1.My.MyWpfExtension.Application">
+ <summary>
+ Restituisce l'oggetto applicazione per l'applicazione in esecuzione
+ </summary>
+</member>
+<member name="P:WpfApp1.My.MyWpfExtension.Computer">
+ <summary>
+ Restituisce le informazioni sul computer host.
+ </summary>
+</member>
+<member name="P:WpfApp1.My.MyWpfExtension.User">
+ <summary>
+ Restituisce le informazioni per l'utente corrente.  Se si desidera eseguire l'applicazione con le 
+ credenziali utente di Windows correnti, chiamare My.User.InitializeWithWindowsUser().
+ </summary>
+</member>
+<member name="P:WpfApp1.My.MyWpfExtension.Log">
+ <summary>
+ Restituisce il registro applicazioni. I listener possono essere configurati dal file di configurazione dell'applicazione.
+ </summary>
+</member>
+<member name="P:WpfApp1.My.MyWpfExtension.Windows">
+ <summary>
+ Restituisce la raccolta di oggetti Window definiti nel progetto.
+ </summary>
+</member>
+<member name="T:WpfApp1.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:WpfApp1.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:WpfApp1.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:WpfApp1.Application">
+<summary>
+Application
+</summary>
+</member>
+<member name="M:WpfApp1.Application.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+<member name="M:WpfApp1.Application.Main">
+<summary>
+Application Entry Point.
+</summary>
+</member>
+<member name="T:WpfApp1.MainWindow">
+<summary>
+MainWindow
+</summary>
+</member>
+<member name="M:WpfApp1.MainWindow.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
+</members>
+</doc>
