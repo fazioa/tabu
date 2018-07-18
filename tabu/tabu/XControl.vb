@@ -29,6 +29,7 @@ Public Class XControl
 
 
     Private _titoloTrafficoVoceOpVirtuali As String
+    Private _titoloTrafficoDatiOpVirtuali As String
 
     Private _campiVoce As New List(Of String)
     Private _campiSMS As New List(Of String)
@@ -358,6 +359,15 @@ Public Class XControl
         End Get
         Set(value As String)
             _fineReport = value
+        End Set
+    End Property
+
+    Public Property TitoloTrafficoDatiOpVirtuali As String
+        Get
+            Return _titoloTrafficoDatiOpVirtuali
+        End Get
+        Set(value As String)
+            _titoloTrafficoDatiOpVirtuali = value
         End Set
     End Property
 

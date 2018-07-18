@@ -16,15 +16,17 @@ Public Class H3G_TRAFF
                 Select Case currentRowFields(0).Trim
                     Case specifica.TitoloTrafficoVoce
                         DecodeWindTreVoce(specifica, _rigaTab, nomeFile, gestore)
+                    Case specifica.TitoloTrafficoVoceOpVirtuali
+                        DecodeWindTreVoce(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoSMS
                         DecodeWindTreSMS(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoDati
-                        DecodeWindTreDATI(specifica, _rigaTab, nomeFile, gestore)
-
+                        DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
+                    Case specifica.TitoloTrafficoDatiOpVirtuali
+                        DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoServizi
                         DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
-                    Case specifica.TitoloTrafficoVoceOpVirtuali
-                        DecodeWindTreVoce(specifica, _rigaTab, nomeFile, gestore)
+
                     Case Else
                         currentRowFields = _MyReader.ReadFields
                 End Select
