@@ -13,16 +13,16 @@
 
 
 <CampiVoce>
-    <string>DataOra</string> <!--- campo successivo Ora Conversazione - occorre unire data e ora  -->
+    <string>DataOra</string> <!---campo successivo Ora Conversazione-occorre unire data e ora -->
 	<string>Durata</string>
 	<string>Chiamante</string>
     <string>Chiamato</string>
 	<string>BTSInizio (non usato)</string>
 	<string>BTSFine (non usato)</string>
 	<string>CellaInizio</string>
-	<string>DescrizioneCellaInizio</string><!--- 2 campi da unire  --> 
+	<string>DescrizioneCellaInizio</string><!---2 campi da unire --> 
 	<string>CellaFine</string>
-	<string>DescrizioneCellaFine</string><!--- 2 campi da unire  -->
+	<string>DescrizioneCellaFine</string><!---2 campi da unire -->
 	<string>Imsi_chiamante</string>
   <string>Imsi_chiamato</string>
   <string>Imei_chiamante</string>
@@ -34,7 +34,7 @@
 </CampiVoce>
 
 <CampiDati>
-	<string>DataOra</string> <!--- campo successivo Ora Conversazione - occorre unire data e ora  -->
+	<string>DataOra</string> <!---campo successivo Ora Conversazione-occorre unire data e ora -->
 	<string>Durata</string>
 	<string>Chiamante</string>
     <string>Chiamato</string>
@@ -44,8 +44,8 @@
 	<string>Imei_chiamante</string>
 	<string>TipoTraffico</string>
 	<string>CODICE CENTRALE (non usato)</string>
-	<string>DescrizioneCellaInizio</string><!--- 2 campi da unire  --> 
-	<string>DescrizioneCellaFine</string><!--- 2 campi da unire  -->
+	<string>DescrizioneCellaInizio</string><!---2 campi da unire --> 
+	<string>DescrizioneCellaFine</string><!---2 campi da unire -->
 </CampiDati>
 <!---
 'UTENZA|DATI_ANAGRAFICI|INDIRIZZO|C.F.|SOCIETA'|PARTITA IVA|DATA DI NASCITA|LUOGO DI NASCITA|SIM CARD|IMSI|DEALER_ATT|DEALER_VEND|DATA ATT|DATA DISATT|STATO|NP/MNP OPERATOR RECIPIENT|DATA 4242|TIPO LINEA|
@@ -73,51 +73,51 @@
 
 <Tipo>
     <Voce>
-	<string>ALCATEL - DBT</string>
-	<string>AS - OF ISDN</string>
-	<string>IMSSF - EC</string>
-	<string>MSC - CF RI</string>
-	<string>MSC - MO</string>
-	<string>MSC - MO RI</string>
-	<string>MSC - MT</string>
-	<string>MSC - RCF</string>
-	<string>MSC - TR</string>
-	<string>MSC - MT - CSR</string>
-	<string>MSC - TR RI</string>
-	<string>VOIP - ITZ</string>
-	<string>VOIP - SBC</string>
-	<string>MSC - MT - CSR</string>
-	<string>MSC - MO RI - CSR</string>
-	<string>MSC - TR - CSR</string>
-	<string>VOIP - ITZ - CSR</string>
-	<string>MSC - CF RI - CSR</string>
-	<string>VOIP - SBC - CSR</string>
-	<string>ALCATEL - DBT - CSR</string>
-	<string>MSC - RCF - CSR</string>
-	<string>TAP - MT</string>
-	<string>MSC - MO - CSR</string>
-	<string>MSC - TR RI - CSR</string>
+	<string>ALCATEL-DBT</string>
+	<string>AS-OF ISDN</string>
+	<string>IMSSF-EC</string>
+	<string>MSC-CF RI</string>
+	<string>MSC-MO</string>
+	<string>MSC-MO RI</string>
+	<string>MSC-MT</string>
+	<string>MSC-RCF</string>
+	<string>MSC-TR</string>
+	<string>MSC-MT-CSR</string>
+	<string>MSC-TR RI</string>
+	<string>VOIP-ITZ</string>
+	<string>VOIP-SBC</string>
+	<string>MSC-MT-CSR</string>
+	<string>MSC-MO RI-CSR</string>
+	<string>MSC-TR-CSR</string>
+	<string>VOIP-ITZ-CSR</string>
+	<string>MSC-CF RI-CSR</string>
+	<string>VOIP-SBC-CSR</string>
+	<string>ALCATEL-DBT-CSR</string>
+	<string>MSC-RCF-CSR</string>
+	<string>TAP-MT</string>
+	<string>MSC-MO-CSR</string>
+	<string>MSC-TR RI-CSR</string>
 	</Voce>
     
     <Sms>
-	<string>MMS - INCOMING</string>
-	<string>MSC - MOSMS</string>
-	<string>MSC - MTSMS</string>
-	<string>SMSC - CDR</string>
-	<string>SMSC - NR</string>
-	<string>SMSC - CDR - PM</string>
-	<string>SMSC - NR</string>
-	<string>MSC - MOSMS - CSR</string>
-	<string>SMSC - CDR - PM</string>
+	<string>MMS-INCOMING</string>
+	<string>MSC-MOSMS</string>
+	<string>MSC-MTSMS</string>
+	<string>SMSC-CDR</string>
+	<string>SMSC-NR</string>
+	<string>SMSC-CDR-PM</string>
+	<string>SMSC-NR</string>
+	<string>MSC-MOSMS-CSR</string>
+	<string>SMSC-CDR-PM</string>
     </Sms>
     
     <Dati>
-	<string>GPRS - GGSN</string>
-	<string>GPRS - SGSN</string>
-	<string>UMTS - GGSN</string>
-	<string>UMTS - SGSN</string>
-	<string>LTE - PGW</string>
-	<string>LTE - SGW</string>
+	<string>GPRS-GGSN</string>
+	<string>GPRS-SGSN</string>
+	<string>UMTS-GGSN</string>
+	<string>UMTS-SGSN</string>
+	<string>LTE-PGW</string>
+	<string>LTE-SGW</string>
     </Dati>
 
     <Altro>
@@ -126,11 +126,11 @@
 
 
     <DettaglioDatiChiamato>
-	<string>MMS - INCOMING</string>
-	<string>MSC - MT</string>
-	<string>MSC - MTSMS</string>
-	<string>MSC - RCF</string>
-	<string>TAP - MT</string>
+	<string>MMS-INCOMING</string>
+	<string>MSC-MT</string>
+	<string>MSC-MTSMS</string>
+	<string>MSC-RCF</string>
+	<string>TAP-MT</string>
     </DettaglioDatiChiamato>
   </Tipo>
 

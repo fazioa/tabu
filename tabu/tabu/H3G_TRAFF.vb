@@ -22,9 +22,9 @@ Public Class H3G_TRAFF
                         DecodeWindTreDATI(specifica, _rigaTab, nomeFile, gestore)
 
                     Case specifica.TitoloTrafficoServizi
-                        currentRowFields = _MyReader.ReadFields  'riga temporanea. L'avanzamento di riga poi sarà dentro il metodo
+                        DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoVoceOpVirtuali
-                        currentRowFields = _MyReader.ReadFields 'riga temporanea. L'avanzamento di riga poi sarà dentro il metodo
+                        DecodeWindTreVoce(specifica, _rigaTab, nomeFile, gestore)
                     Case Else
                         currentRowFields = _MyReader.ReadFields
                 End Select
