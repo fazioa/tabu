@@ -2,7 +2,9 @@
 Public Class Vodafone_anagrafica
     Dim _MyReader As TextFieldParser
     Dim currentRowFields As String()
-    Sub DecodeVodafone(pathNomeFile As String, ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
+    Dim iRigheDecodeVodafone As ULong = 0
+
+    Function DecodeVodafone(pathNomeFile As String, ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
@@ -18,7 +20,7 @@ Public Class Vodafone_anagrafica
                 Select Case currentRowFields(0).Trim
                     Case specifica.TitoloAnagrafica
                         SetImporter(_MyReader, specifica)
-                        DecodeVodafoneAnagrafica(specifica, _rigaAnag, nomeFile, gestore)
+                        iRigheDecodeVodafone = DecodeVodafoneAnagrafica(specifica, _rigaAnag, nomeFile, gestore)
                     Case Else
                         currentRowFields = _MyReader.ReadFields
                 End Select
@@ -30,14 +32,15 @@ Public Class Vodafone_anagrafica
             End Try
         End While
 
+        Return iRigheDecodeVodafone
+    End Function
 
-    End Sub
 
-
-    Sub DecodeVodafoneAnagrafica(_specifica As XControl, ByRef _rigaAna As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
+    Function DecodeVodafoneAnagrafica(_specifica As XControl, ByRef _rigaAna As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
 
         Dim riga As rigaAnagrafica
         Dim bExit As Boolean = False
+        Dim iRigheDecodeVodafoneAnagrafica As ULong = 0
 
         'salta una riga
         currentRowFields = _MyReader.ReadFields
@@ -78,7 +81,7 @@ Public Class Vodafone_anagrafica
                                     riga.DatiAnagrafici = currentRowFields(i)
                                 End If
                             End If
-                                Case "Residenza"
+                        Case "Residenza"
                             If (currentRowFields.Length > i) Then
                                 riga.Indirizzo = currentRowFields(i)
                             End If
@@ -104,12 +107,14 @@ Public Class Vodafone_anagrafica
                     i = i + 1
                 Next
                 _rigaAna.Add(riga)
+                iRigheDecodeVodafoneAnagrafica = iRigheDecodeVodafoneAnagrafica + 1
             Else
                 'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
                 bExit = True
             End If
         End While
-    End Sub
+        Return iRigheDecodeVodafoneAnagrafica
+    End Function
 
     Private Sub SetImporter(ByRef _MyReader As FileIO.TextFieldParser, ByRef _specifica As XControl)
         _MyReader.HasFieldsEnclosedInQuotes = False

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <XControl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <intestazione>Ricerca Traffico Storico</intestazione>
-  <TitoloTraffico>Origine</TitoloTraffico>
+  <TitoloTraffico>Traffico Telefonico</TitoloTraffico>
+  <TitoloTrafficoBTS>Ricerca per BTS</TitoloTrafficoBTS>
   <TitoloAnagrafica>Ricerca Anagrafica per tabulato RTS</TitoloAnagrafica>
+  <SottoTitoloTrafficoVoce>Origine</SottoTitoloTrafficoVoce>
+  
   
   <delimitato>false</delimitato>
   <delimitatore> </delimitatore>
@@ -25,7 +28,20 @@
   <int>219</int>
   <int>9999</int>
  </delimitatoriFissi>
- 
+
+  <delimitatoriFissiBTS>
+    <int>1</int>
+    <int>31</int>
+    <int>56</int>
+    <int>96</int>
+    <int>121</int>
+    <int>146</int>
+    <int>156</int>
+    <int>169</int>
+    <int>194</int>
+    <int>9999</int>
+  </delimitatoriFissiBTS>
+
   <trimWhiteSpace>true</trimWhiteSpace>
                                     
                                                                                                
@@ -40,7 +56,17 @@
 	<string>IMSI</string>
 	<string>DescrizioneCellaInizioFine</string>
 </CampiVoce>
-   
+
+  <CampiVoceBTS>
+    <string>Origine / Smcs / Digitato</string>
+    <string>Chiamato</string>
+    <string>Chiamante</string>
+    <string>Data e Ora Inizio</string>
+    <string>Tipo</string>
+    <string>UCA</string>
+    <string>IMEI</string>
+    <string>IMSI</string>
+  </CampiVoceBTS>
 
 <Tipo>
     <Voce>

@@ -11,10 +11,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Button x:Name="Button_file" Content="File..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
-        <DataGrid x:Name="gridFileList" Margin="10,35,10,622" AllowDrop="True"/>
+        <DataGrid x:Name="gridFileList" Margin="10,35,10,622" AllowDrop="True" AlternationCount="2">
+            <DataGrid.AlternatingRowBackground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}"/>
+            </DataGrid.AlternatingRowBackground>
+        </DataGrid>
         <Button x:Name="Button_importa" Content="Importa" HorizontalAlignment="Left" Margin="89,10,0,0" VerticalAlignment="Top" Width="76" Height="20"/>
-        <DataGrid x:Name="grid_dettaglio_tabulato" Height="301" Margin="10,0,10,316" VerticalAlignment="Bottom" AllowDrop="False"/>
-        <DataGrid x:Name="grid_anagrafica" Height="301" Margin="10,0,10,10" VerticalAlignment="Bottom" AllowDrop="False"/>
+        <DataGrid x:Name="grid_dettaglio_tabulato" Height="301" Margin="10,0,10,316" VerticalAlignment="Bottom" AllowDrop="False"  AlternationCount="2">
+            <DataGrid.AlternatingRowBackground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}"/>
+            </DataGrid.AlternatingRowBackground>
+        </DataGrid>
+        <DataGrid x:Name="grid_anagrafica" Height="301" Margin="10,0,10,10" VerticalAlignment="Bottom" AllowDrop="False" AlternationCount="2">
+            <DataGrid.AlternatingRowBackground>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}"/>
+            </DataGrid.AlternatingRowBackground>
+        </DataGrid>
         <Button x:Name="Button_esporta" Content="Esporta" HorizontalAlignment="Left" Margin="169,10,0,0" VerticalAlignment="Top" Width="76"/>
     </Grid>
 </Window>

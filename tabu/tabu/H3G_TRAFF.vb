@@ -2,7 +2,9 @@
 Public Class H3G_TRAFF
     Dim _MyReader As TextFieldParser
     Dim currentRowFields As String()
-    Sub DecodeWindTre(pathNomeFile As String, ByRef _rigaTab As List(Of rigaTabulato), nomeFile As String, gestore As String)
+    Dim iRigheDecodeH3G As ULong = 0
+
+    Function DecodeWindTre(pathNomeFile As String, ByRef _rigaTab As List(Of rigaTabulato), nomeFile As String, gestore As String)
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
@@ -15,17 +17,17 @@ Public Class H3G_TRAFF
             Try
                 Select Case currentRowFields(0).Trim
                     Case specifica.TitoloTrafficoVoce
-                        DecodeWindTreVoce(specifica, _rigaTab, nomeFile, gestore)
+                        iRigheDecodeH3G = DecodeWindTreVoce(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoVoceOpVirtuali
-                        DecodeWindTreVoce(specifica, _rigaTab, nomeFile, gestore)
+                        iRigheDecodeH3G = DecodeWindTreVoce(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoSMS
-                        DecodeWindTreSMS(specifica, _rigaTab, nomeFile, gestore)
+                        iRigheDecodeH3G = DecodeWindTreSMS(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoDati
-                        DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
+                        iRigheDecodeH3G = DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoDatiOpVirtuali
-                        DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
+                        iRigheDecodeH3G = DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
                     Case specifica.TitoloTrafficoServizi
-                        DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
+                        iRigheDecodeH3G = DecodeWindTreDati(specifica, _rigaTab, nomeFile, gestore)
 
                     Case Else
                         currentRowFields = _MyReader.ReadFields
@@ -38,13 +40,14 @@ Public Class H3G_TRAFF
             End Try
         End While
 
+        Return iRigheDecodeH3G
+    End Function
 
-    End Sub
-
-    Sub DecodeWindTreSMS(_specifica As XControl, _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
+    Function DecodeWindTreSMS(_specifica As XControl, _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
         'Dim currentRowFields As String()
         Dim riga As rigaTabulato
         Dim bExit As Boolean = False
+        Dim iRigheDecodeH3GSMS As ULong = 0
 
         'salta una riga
         currentRowFields = _MyReader.ReadFields
@@ -93,17 +96,20 @@ Public Class H3G_TRAFF
                     i = i + 1
                 Next
                 _rigaTab.Add(riga)
+                iRigheDecodeH3GSMS = iRigheDecodeH3GSMS + 1
             Else
                 'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
                 bExit = True
             End If
         End While
-    End Sub
+        Return iRigheDecodeH3GSMS
+    End Function
 
-    Sub DecodeWindTreVoce(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
+    Function DecodeWindTreVoce(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
 
         Dim riga As rigaTabulato
         Dim bExit As Boolean = False
+        Dim iRigheDecodeH3GVoce As ULong = 0
 
         'salta una riga
         currentRowFields = _MyReader.ReadFields
@@ -155,17 +161,20 @@ Public Class H3G_TRAFF
                     i = i + 1
                 Next
                 _rigaTab.Add(riga)
+                iRigheDecodeH3GVoce = iRigheDecodeH3GVoce + 1
             Else
                 'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
                 bExit = True
             End If
         End While
-    End Sub
+        Return iRigheDecodeH3GVoce
+    End Function
 
-    Sub DecodeWindTreDati(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
+    Function DecodeWindTreDati(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
 
         Dim riga As rigaTabulato
         Dim bExit As Boolean = False
+        Dim iRigheDecodeH3GDati As ULong = 0
 
         'salta una riga
         currentRowFields = _MyReader.ReadFields
@@ -203,12 +212,14 @@ Public Class H3G_TRAFF
                     i = i + 1
                 Next
                 _rigaTab.Add(riga)
+                iRigheDecodeH3GDati = iRigheDecodeH3GDati + 1
             Else
                 'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
                 bExit = True
             End If
         End While
-    End Sub
+        Return iRigheDecodeH3GDati
+    End Function
 
 
     Private Function IsDatiChiamato(_specifica As XControl, tipo As String) As Boolean

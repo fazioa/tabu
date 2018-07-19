@@ -2,7 +2,9 @@
 Public Class Wind
     Dim _MyReader As TextFieldParser
     Dim currentRowFields As String()
-    Sub DecodeWind(pathNomeFile As String, ByRef _rigaTab As List(Of rigaTabulato), ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
+    Dim iRigheDecodeWind As ULong = 0
+
+    Function DecodeWind(pathNomeFile As String, ByRef _rigaTab As List(Of rigaTabulato), ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
@@ -22,9 +24,9 @@ Public Class Wind
                         currentRowFields = read(_MyReader)
                         Select Case currentRowFields(0).Trim
                             Case specifica.SottoTitoloTrafficoVoce
-                                DecodeWindVoce(specifica, _rigaTab, nomeFile, gestore)
+                                iRigheDecodeWind = DecodeWindVoce(specifica, _rigaTab, nomeFile, gestore)
                             Case specifica.SottoTitoloTrafficoDati
-                                DecodeWindDati(specifica, _rigaTab, nomeFile, gestore)
+                                iRigheDecodeWind = DecodeWindDati(specifica, _rigaTab, nomeFile, gestore)
                         End Select
                 End Select
                 'in uscita è possibile agganciare l'anagrafica con un secondo Select
@@ -38,7 +40,8 @@ Public Class Wind
                 MsgBox("File " & nomeFile & " - Line " & _MyReader.LineNumber & " - " & ex.Message & "is not valid and will be skipped.")
             End Try
         End While
-    End Sub
+        Return iRigheDecodeWind
+    End Function
 
     Sub DecodeWindAnagrafica(_specifica As XControl, ByRef _rigaAnag As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
         Dim rigaAnagrafica As rigaAnagrafica
@@ -94,9 +97,11 @@ Public Class Wind
 
 
 
-    Sub DecodeWindVoce(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
+    Function DecodeWindVoce(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
         Dim riga As rigaTabulato
         Dim bExit As Boolean = False
+        Dim iRigheDecodeVoce As ULong = 0
+
         Const NUMERO_CAMPO_TIPO_CHIAMATA As Integer = 20
         'salta una riga
         ' currentRowFields = _MyReader.ReadFields
@@ -172,16 +177,20 @@ Public Class Wind
                     i = i + 1
                 Next
                 _rigaTab.Add(riga)
+                iRigheDecodeVoce = iRigheDecodeVoce + 1
             Else
                 'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
                 bExit = True
             End If
         End While
-    End Sub
+        Return iRigheDecodeVoce
+    End Function
 
-    Sub DecodeWindDati(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
+    Function DecodeWindDati(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
         Dim riga As rigaTabulato
         Dim bExit As Boolean = False
+        Dim iRigheDecodeDati As ULong = 0
+
         'salta una riga
         ' currentRowFields = _MyReader.ReadFields
         While Not _MyReader.EndOfData And Not bExit = True
@@ -242,13 +251,14 @@ Public Class Wind
                     i = i + 1
                 Next
                 _rigaTab.Add(riga)
+                iRigheDecodeDati = iRigheDecodeDati + 1
             Else
                 'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
                 bExit = True
             End If
         End While
-
-    End Sub
+        Return iRigheDecodeDati
+    End Function
 
     Private Function IsDatiChiamato(_specifica As XControl, tipo As String) As Boolean
         Dim _dettagliChiamatoListaSigle As List(Of String) = _specifica.Tipo.DettaglioDatiChiamato

@@ -70,28 +70,29 @@ Class MainWindow
             Select Case rowInDataset.Gestore
                 Case constants.telecomTraffico
                     Dim tim_traffico As New TimVoce()
-                    tim_traffico.DecodeTim(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+                    rowInDataset.Righe_Importate = tim_traffico.DecodeTim(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+
                 Case constants.telecomTrafficoTelematico
                     Dim tim_traffico As New TimDati()
                     tim_traffico.DecodeTim(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.telecomAnagrafica
                     Dim tim_anagrafica As New Tim_anagrafica()
-                    tim_anagrafica.DecodeTim(rowInDataset.pathNomeFile, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+                    rowInDataset.Righe_Importate = tim_anagrafica.DecodeTim(rowInDataset.pathNomeFile, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.vodafoneTraffico
                     Dim vodafone As New Vodafone()
-                    vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+                    rowInDataset.Righe_Importate = vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.vodafoneAnagrafica
                     Dim vodafone As New Vodafone_anagrafica()
-                    vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+                    rowInDataset.Righe_Importate = vodafone.DecodeVodafone(rowInDataset.pathNomeFile, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.windTraffico
                     Dim wind As New Wind()
-                    wind.DecodeWind(rowInDataset.pathNomeFile, righeTabulato, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+                    rowInDataset.Righe_Importate = wind.DecodeWind(rowInDataset.pathNomeFile, righeTabulato, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.windTreTraffico
                     Dim tre_traffico As New H3G_TRAFF()
-                    tre_traffico.DecodeWindTre(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+                    rowInDataset.Righe_Importate = tre_traffico.DecodeWindTre(rowInDataset.pathNomeFile, righeTabulato, rowInDataset.pathNomeFile, rowInDataset.Gestore)
                 Case constants.windTreAnagrafica
                     Dim tre_anagrafica As New H3G_ANA()
-                    tre_anagrafica.DecodeWindTre(rowInDataset.pathNomeFile, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
+                    rowInDataset.Righe_Importate = tre_anagrafica.DecodeWindTre(rowInDataset.pathNomeFile, righeAnagrafica, rowInDataset.pathNomeFile, rowInDataset.Gestore)
             End Select
         Next
 
@@ -181,5 +182,6 @@ Class MainWindow
         End If
         gridFileList.Items.Refresh()
     End Sub
+
 End Class
 

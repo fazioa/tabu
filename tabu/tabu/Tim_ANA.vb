@@ -4,7 +4,9 @@ Imports tabu
 Public Class Tim_anagrafica
     Dim _MyReader As TextFieldParser
     Dim currentRowFields As String()
-    Sub DecodeTim(pathNomeFile As String, ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
+    Dim iRigheDecodeTimAnagrafica As ULong = 0
+
+    Function DecodeTim(pathNomeFile As String, ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
@@ -24,7 +26,7 @@ Public Class Tim_anagrafica
                 Select Case currentRowFields(0).Trim
                     Case specifica.TitoloAnagrafica
                         SetImporter(_MyReader, specifica)
-                        DecodeTimAnagrafica(specifica, _rigaAnag, nomeFile, gestore)
+                        iRigheDecodeTimAnagrafica = DecodeTimAnagrafica(specifica, _rigaAnag, nomeFile, gestore)
                 End Select
 
             Catch ex As Microsoft.VisualBasic.
@@ -32,12 +34,14 @@ Public Class Tim_anagrafica
                 MsgBox("File " & nomeFile & " - Line " & _MyReader.LineNumber & " - " & ex.Message & "is not valid and will be skipped.")
             End Try
         End While
-    End Sub
+        Return iRigheDecodeTimAnagrafica
+    End Function
 
 
-    Sub DecodeTimAnagrafica(_specifica As XControl, ByRef _rigaAna As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
+    Function DecodeTimAnagrafica(_specifica As XControl, ByRef _rigaAna As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
         Dim riga As rigaAnagrafica
         Dim bExit As Boolean = False 'usata per l'uscita dal ciclo in caso di stringa di fine report
+        Dim iRighe As ULong
 
         Dim sLine As String
 
@@ -71,12 +75,14 @@ Public Class Tim_anagrafica
 
 
                 _rigaAna.Add(riga)
+                iRighe = iRighe + 1
 
             Catch ex As MalformedLineException
                 MsgBox("Error - File " & _nomeFile & " - Line nr." & _MyReader.LineNumber & " - " & ex.Message & " - " & _MyReader.ErrorLine)
             End Try
         End While
-    End Sub
+        Return iRighe
+    End Function
 
     Private Sub leggiRiga1(sLine As String, riga As rigaAnagrafica, _specifica As XControl)
         Dim i As Integer = 0

@@ -2,7 +2,8 @@
 Public Class TimVoce
     Dim _MyReader As TextFieldParser
     Dim currentRowFields As String()
-    Sub DecodeTim(pathNomeFile As String, ByRef _rigaTab As List(Of rigaTabulato), nomeFile As String, gestore As String)
+    Dim iRighe As ULong = 0
+    Function DecodeTim(pathNomeFile As String, ByRef _rigaTab As List(Of rigaTabulato), nomeFile As String, gestore As String)
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
@@ -22,7 +23,7 @@ Public Class TimVoce
                 Select Case currentRowFields(0).Trim
                     Case specifica.TitoloTrafficoVoce
                         SetImporter(_MyReader, specifica)
-                        DecodeTimVoce(specifica, _rigaTab, nomeFile, gestore)
+                        iRighe = DecodeTimVoce(specifica, _rigaTab, nomeFile, gestore)
                 End Select
 
             Catch ex As Microsoft.VisualBasic.
@@ -30,13 +31,14 @@ Public Class TimVoce
                 MsgBox("File " & nomeFile & " - Line " & _MyReader.LineNumber & " - " & ex.Message & "is not valid and will be skipped.")
             End Try
         End While
-    End Sub
+        Return iRighe
+    End Function
 
 
-    Sub DecodeTimVoce(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
+    Function DecodeTimVoce(_specifica As XControl, ByRef _rigaTab As List(Of rigaTabulato), _nomeFile As String, _gestore As String)
         Dim riga As rigaTabulato
         Dim bExit As Boolean = False
-
+        Dim iRigheDecodeTimVoce As ULong = 0
 
         Const NUMERO_CAMPO_TIPO_CHIAMATA As Integer = 21
         'salta una riga
@@ -99,14 +101,15 @@ Public Class TimVoce
                     End Select
                     i = i + 1
                 Next
-                ' continuare  da qui
                 _rigaTab.Add(riga)
+                iRigheDecodeTimVoce = iRigheDecodeTimVoce + 1
             Else
                 'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
                 bExit = True
             End If
         End While
-    End Sub
+        Return iRigheDecodeTimVoce
+    End Function
 
     Private Function IsDatiChiamato(_specifica As XControl, tipo As String) As Boolean
         Dim _dettagliChiamatoListaSigle As List(Of String) = _specifica.Tipo.DettaglioDatiChiamato

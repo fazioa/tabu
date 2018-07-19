@@ -8,6 +8,7 @@ Public Class XControl
     Private _delimitatoAnagrafica As Boolean
     Private _delimitatoreAnagrafica As String
     Private _delimitatoriFissi As New List(Of Integer)
+    Private _delimitatoriFissiBTS As New List(Of Integer)
 
     Private _delimitatoriFissiRiga1 As New List(Of Integer)
     Private _delimitatoriFissiRiga2 As New List(Of Integer)
@@ -17,6 +18,7 @@ Public Class XControl
     Private _larghezzaFissa As Boolean
 
     Private _titoloTraffico As String
+    Private _titoloTrafficoBTS As String
     Private _titoloTrafficoVoce As String
     Private _titoloTrafficoSMS As String
     Private _titoloTrafficoServizi As String
@@ -32,6 +34,7 @@ Public Class XControl
     Private _titoloTrafficoDatiOpVirtuali As String
 
     Private _campiVoce As New List(Of String)
+    Private _campiVoceBTS As New List(Of String)
     Private _campiSMS As New List(Of String)
     Private _campiDati As New List(Of String)
     Private _campiAnagrafica As New List(Of String)
@@ -182,6 +185,15 @@ Public Class XControl
         End Set
     End Property
 
+    Public Property CampiVoceBTS As List(Of String)
+        Get
+            Return _campiVoceBTS
+        End Get
+        Set(value As List(Of String))
+            _campiVoceBTS = value
+        End Set
+    End Property
+
     Public Property Tipo As tipoComunicazione
         Get
             Return _tipo
@@ -220,10 +232,10 @@ Public Class XControl
 
     Public Property SottoTitoloTrafficoVoce As String
         Get
-            Return _sottoTitoloTrafficoVoce
+            Return SottoTitoloTrafficoVoce1
         End Get
         Set(value As String)
-            _sottoTitoloTrafficoVoce = value
+            SottoTitoloTrafficoVoce1 = value
         End Set
     End Property
 
@@ -260,6 +272,16 @@ Public Class XControl
         End Get
         Set(value As List(Of Integer))
             _delimitatoriFissi = value
+        End Set
+    End Property
+
+
+    Public Property delimitatoriFissiBTS As List(Of Integer)
+        Get
+            Return _delimitatoriFissiBTS
+        End Get
+        Set(value As List(Of Integer))
+            _delimitatoriFissiBTS = value
         End Set
     End Property
 
@@ -370,6 +392,25 @@ Public Class XControl
             _titoloTrafficoDatiOpVirtuali = value
         End Set
     End Property
+
+    Public Property TitoloTrafficoBTS As String
+        Get
+            Return _titoloTrafficoBTS
+        End Get
+        Set(value As String)
+            _titoloTrafficoBTS = value
+        End Set
+    End Property
+
+    Public Property SottoTitoloTrafficoVoce1 As String
+        Get
+            Return _sottoTitoloTrafficoVoce
+        End Get
+        Set(value As String)
+            _sottoTitoloTrafficoVoce = value
+        End Set
+    End Property
+
 
 
     'load from file

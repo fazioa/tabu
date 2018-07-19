@@ -2,7 +2,9 @@
 Public Class H3G_ANA
     Dim _MyReader As TextFieldParser
     Dim currentRowFields As String()
-    Sub DecodeWindTre(pathNomeFile As String, ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
+    Dim iRigheDecodeWind As ULong = 0
+
+    Function DecodeWindTre(pathNomeFile As String, ByRef _rigaAnag As List(Of rigaAnagrafica), nomeFile As String, gestore As String)
         _MyReader = New FileIO.TextFieldParser(pathNomeFile)
         'imposta le specifiche per il gestore
         Dim specifica As New XControl
@@ -15,7 +17,7 @@ Public Class H3G_ANA
             Try
                 Select Case currentRowFields(0).Trim
                     Case specifica.TitoloAnagrafica
-                        DecodeWindTreAnagrafica(specifica, _rigaAnag, nomeFile, gestore)
+                        iRigheDecodeWind = DecodeWindTreAnagrafica(specifica, _rigaAnag, nomeFile, gestore)
                     Case Else
                         currentRowFields = _MyReader.ReadFields
                 End Select
@@ -27,14 +29,15 @@ Public Class H3G_ANA
             End Try
         End While
 
+        Return iRigheDecodeWind
+    End Function
 
-    End Sub
 
-
-    Sub DecodeWindTreAnagrafica(_specifica As XControl, ByRef _rigaAna As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
+    Function DecodeWindTreAnagrafica(_specifica As XControl, ByRef _rigaAna As List(Of rigaAnagrafica), _nomeFile As String, _gestore As String)
 
         Dim riga As rigaAnagrafica
         Dim bExit As Boolean = False
+        Dim iRigheDecodeWindAnagrafica As ULong = 0
 
         'salta una riga
         currentRowFields = _MyReader.ReadFields
@@ -54,7 +57,7 @@ Public Class H3G_ANA
                             riga.Utenza = currentRowFields(i)
                         Case "Nome"
                             riga.DatiAnagrafici = currentRowFields(i + 1) + " " + currentRowFields(i) 'cognome e nome
-                              i = i + 1
+                            i = i + 1
                         Case "Rag. Soc."
                             riga.Societa = currentRowFields(i)
                         Case "CF"
@@ -78,12 +81,14 @@ Public Class H3G_ANA
                     i = i + 1
                 Next
                 _rigaAna.Add(riga)
+                iRigheDecodeWindAnagrafica = iRigheDecodeWindAnagrafica + 1
             Else
                 'se la lunghezza della lista campi è uno vuol dire che abbiamo raggiunto la fine del gruppo di righe
                 bExit = True
             End If
         End While
-    End Sub
+        Return iRigheDecodeWindAnagrafica
+    End Function
 
     Private Sub SetImporter(ByRef _MyReader As FileIO.TextFieldParser, ByRef _specifica As XControl)
         _MyReader.HasFieldsEnclosedInQuotes = False
