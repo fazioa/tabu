@@ -5,7 +5,7 @@ Imports tabu
 Public Class rigaFile
     Dim _pathNomeFile As String
     Dim _gestore As String
-    Dim _righe_importate As String
+    Dim _righe_importate As Integer
 
     Public Sub New()
 
@@ -30,11 +30,11 @@ Public Class rigaFile
             End Set
         End Property
 
-    Public Property Righe_Importate As String
+    Public Property Righe_Importate As Integer
         Get
             Return _righe_importate
         End Get
-        Set(value As String)
+        Set(value As Integer)
             _righe_importate = value
         End Set
     End Property

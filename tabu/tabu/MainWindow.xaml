@@ -11,13 +11,42 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Button x:Name="Button_file" Content="File..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Height="20"/>
-        <DataGrid x:Name="gridFileList" Margin="10,35,10,622" AllowDrop="True" AlternationCount="2">
+        <DataGrid x:Name="gridFileList" Margin="10,35,10,622" AllowDrop="True" AlternationCount="2" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Gestore}" ClipboardContentBinding="{Binding Path=Gestore}" Header="Gestore"/>
+                <DataGridTextColumn Binding="{Binding Path=pathNomeFile}" ClipboardContentBinding="{Binding Path=pathNomeFile}" Header="Nome file"/>
+                <DataGridTextColumn Binding="{Binding Path=Righe_Importate}" ClipboardContentBinding="{Binding Path=Righe_Importate}" Header="Righe importate"/>
+            </DataGrid.Columns>
             <DataGrid.AlternatingRowBackground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}"/>
             </DataGrid.AlternatingRowBackground>
         </DataGrid>
         <Button x:Name="Button_importa" Content="Importa" HorizontalAlignment="Left" Margin="89,10,0,0" VerticalAlignment="Top" Width="76" Height="20"/>
-        <DataGrid x:Name="grid_dettaglio_tabulato" Height="301" Margin="10,0,10,316" VerticalAlignment="Bottom" AllowDrop="False"  AlternationCount="2">
+        <DataGrid x:Name="grid_dettaglio_tabulato" Height="301" Margin="10,0,10,316" VerticalAlignment="Bottom" AllowDrop="False"  AlternationCount="2" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Gestore}" ClipboardContentBinding="{x:Null}" Header="Gestore"/>
+                <DataGridTextColumn Binding="{Binding NomeFile}" ClipboardContentBinding="{x:Null}" Header="Nome file"/>
+                <DataGridTextColumn Binding="{Binding Rete}" ClipboardContentBinding="{x:Null}" Header="Rete"/>
+                <DataGridTextColumn Binding="{Binding DataOra, StringFormat=\{0:dd/MM/yyyy HH:mm:ss\}}" ClipboardContentBinding="{x:Null}" Header="Data ora"/>
+                <DataGridTextColumn Binding="{Binding Tipologia}" ClipboardContentBinding="{x:Null}" Header="Tipo"/>
+                <DataGridTextColumn Binding="{Binding Codice_tipo_chiamata}" ClipboardContentBinding="{x:Null}" Header="Codice Tipo"/>
+                <DataGridTextColumn Binding="{Binding Chiamante}" ClipboardContentBinding="{x:Null}" Header="Chiamante"/>
+                <DataGridTextColumn Binding="{Binding Chiamato}" ClipboardContentBinding="{x:Null}" Header="Chiamato"/>
+                <DataGridTextColumn Binding="{Binding Durata}" ClipboardContentBinding="{x:Null}" Header="Durata"/>
+                <DataGridTextColumn Binding="{Binding Imei_chiamante}" ClipboardContentBinding="{x:Null}" Header="Imei chiamante"/>
+                <DataGridTextColumn Binding="{Binding Imei_chiamato}" ClipboardContentBinding="{x:Null}" Header="Imei chiamato"/>
+                <DataGridTextColumn Binding="{Binding Imsi_chiamante}" ClipboardContentBinding="{x:Null}" Header="Imsi chiamante"/>
+                <DataGridTextColumn Binding="{Binding Imsi_chiamato}" ClipboardContentBinding="{x:Null}" Header="Imsi chiamato"/>
+                <DataGridTextColumn Binding="{Binding CellaChiamante_inizio}" ClipboardContentBinding="{x:Null}" Header="Cella chiamante inizio"/>
+                <DataGridTextColumn Binding="{Binding CellaChiamante_fine}" ClipboardContentBinding="{x:Null}" Header="Cella chiamante fine"/>
+                <DataGridTextColumn Binding="{Binding CellaChiamato_inizio}" ClipboardContentBinding="{x:Null}" Header="Cella chiamato inizio"/>
+                <DataGridTextColumn Binding="{Binding CellaChiamato_fine}" ClipboardContentBinding="{x:Null}" Header="Cella chiamato fine"/>
+                <DataGridTextColumn Binding="{Binding DescrizioneCellaInizioFine_Chiamante}" ClipboardContentBinding="{x:Null}" Header="Descrizione cella chiamante"/>
+                <DataGridTextColumn Binding="{Binding DescrizioneCellaInizioFine_Chiamato}" ClipboardContentBinding="{x:Null}" Header="Descrizione cella chiamato"/>
+                
+                
+
+            </DataGrid.Columns>
             <DataGrid.AlternatingRowBackground>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionColorKey}}"/>
             </DataGrid.AlternatingRowBackground>
