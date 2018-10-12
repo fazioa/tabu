@@ -54,7 +54,10 @@ Public Class TimDati
 
                     Select Case campo
                         Case "Numerazione utente"
-                            riga.Chiamante = currentRowFields(i)
+                            'le utenze dati vengono fornite nel formato 39xxxxxxxx, pertanto è necessario aggiungere 00, oppure +, oppure rimuovere il prefisso. 
+                            'la funzione rimuove, solo se esiste, il prefisso 39
+                            riga.Chiamante = normalizzazioneUtenza(currentRowFields(i))
+
                         Case "APN"
                             riga.Chiamato = currentRowFields(i)
                         Case "Traffico dal"
@@ -94,6 +97,18 @@ Public Class TimDati
             End If
         End While
     End Sub
+
+    Private Function normalizzazioneUtenza(sUtenza As String) As String
+        If (sUtenza.StartsWith("39")) Then
+            sUtenza = sUtenza.Substring(2)
+        End If
+
+
+
+        Return sUtenza
+    End Function
+
+
 
     Private Function IsDatiChiamato(_specifica As XControl, tipo As String) As Boolean
         Dim _dettagliChiamatoListaSigle As List(Of String) = _specifica.Tipo.DettaglioDatiChiamato
