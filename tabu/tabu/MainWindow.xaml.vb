@@ -138,13 +138,14 @@ Class MainWindow
 
             For Each sFileName In selectedFileList
 
-
+                'controlla che il file non sia già presnete nella grid
                 For Each riga In itemsDataset
                     If (System.IO.Path.GetFileName(riga.pathNomeFile).Equals(System.IO.Path.GetFileName(sFileName))) Then
                         bFlag = True
                     End If
                 Next
 
+                'se non è presente allora lo inserisce
                 If (Not bFlag) Then
                     addFile(sFileName)
 
